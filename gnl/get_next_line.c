@@ -12,113 +12,99 @@
 
 #include "get_next_line.h"
 
-char	*ft_read_line(int fd, char *backup)
+char	*ft_read_line(int fd, char *buffer, char *backup)
 {
 	int		read_size;
-	char	*buffer;
+	char	*tmp;
 
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
 	read_size = 1;
-	while (ft_strchr(backup, '\n') == 0 && read_size != 0)
+	while (read_size)
 	{
 		read_size = read(fd, buffer, BUFFER_SIZE);
-		if (read_size == -1)
-		{
-			free(buffer);
-			buffer = NULL;
-			return (NULL);
-		}
-	buffer[read_size] = '\0';
-	backup = ft_strjoin(backup, buffer);
+		if (read_size < 0)
+			return (0);
+		if (read_size == 0)
+			break ;
+		buffer[read_size] = '\0';
+		if(!backup)
+			backup = ft_strdup("");
+		tmp = backup;
+		backup = ft_strjoin(tmp, buffer);
+		if(!backup)
+			return (0);
+		free(tmp);
+		tmp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
 	return (backup);
 }
 
-char	*ft_get_line(char *backup)
+char *ft_backup_line(char *line)
 {
 	int		i;
 	char	*result;
 
 	i = 0;
-	if (backup[i] == '\0')
+	if (line[i] == '\0')
 		return (0);
-	while (backup[i] != '\n' && backup[i] != '\0')
+	while (line[i] != '\n' && line[i] != '\0')
 		i++;
-	result = (char *)malloc(sizeof(char) * (i + 2));
+	result = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (!result)
-		return (NULL);
-	i = 0;
-	while (backup[i] != '\0' && backup[i] != '\n')
+		return (0);
+	if (result[0] == '\0')
 	{
-		result[i] = backup[i];
-		i++;
+		free(result);
+		result = NULL;
+		return (0);
 	}
-	if (backup[i] == '\n')
-	{
-		result[i] = backup[i];
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
-}
-
-char	*ft_free(char *backup)
-{
-	int		i;
-	int		j;
-	char	*result;
-
-	i = 0;
-	while (backup[i] != '\0' && backup[i] != '\n')
-		i++;
-	if (backup[i] == '\0')
-	{
-		free(backup);
-		backup = NULL;
-		return (NULL);
-	}
-	result = (char *)malloc(sizeof(char) * (ft_strlen(backup) - i + 1));
-	if (!result)
-		return (NULL);
-	i++;
-	j = 0;
-	while (backup[i] != '\0')
-		result[j++] = backup[i++];
-	result[j] = '\0';
-	free(backup);
+	line[i + 1] = '\0';
 	return (result);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*backup;
-	char		*line;
-
+	static char	*backup; // 읽어온 파일을 저장하는 정적변수
+	char		*buffer; // read()로 BUFFER_SIZE만큼 받아올 버퍼
+	char		*line; // 결과값
+	
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	backup = ft_read_line(fd, backup);
-	if (!backup)
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (NULL);
-	line = ft_get_line(backup);
-	backup = ft_free(backup);
-	return (line); 
+	line = ft_read_line(fd, buffer, backup);
+	free(buffer);
+	if(line == NULL)
+	{
+		if (backup != NULL)
+		{
+			free(backup);
+			backup = NULL;
+		}
+		return (NULL);
+	}
+	backup = ft_backup_line(line);
+	return (line);
 }
 
-#include <fcntl.h>
-#include <stdio.h>
+// #include <fcntl.h>
+// #include <stdio.h>
 
-int main(void)
-{
-  int fd;
+// int main(void)
+// {
+//   int fd;
 
-  fd = 0;
-  fd = open("./test.txt", O_RDONLY);
-  char *line = get_next_line(fd);
-  printf("%p\n", line);
-  printf("%s", line);
+//   fd = 0;
+//   fd = open("./test.txt", O_RDONLY);
+// 	char *line = get_next_line(fd);
+//   printf("%p\n", line);
+//   printf("%s", line);
+// 	line = get_next_line(fd);
+//   printf("%p\n", line);
+//   printf("%s", line);
 
-  return (0);
+//   return (0);
   
-}
+// }
