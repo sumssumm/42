@@ -30,9 +30,9 @@ char	*ft_read_line(int fd, char *buffer, char *backup)
 			backup = ft_strdup("");
 		tmp = backup;
 		backup = ft_strjoin(tmp, buffer);
+		free(tmp);
 		if(!backup)
 			return (0);
-		free(tmp);
 		tmp = NULL;
 		if (ft_strchr(buffer, '\n'))
 			break ;
