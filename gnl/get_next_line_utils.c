@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:34:23 by suminpar          #+#    #+#             */
-/*   Updated: 2023/06/26 17:22:14 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/06/26 20:35:51 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	if (!str)
+	if (str == NULL)
 		return (NULL);
 	(void)ft_memcpy(str, s1, s1_len);
 	(void)ft_memcpy(str + s1_len, s2, s2_len);

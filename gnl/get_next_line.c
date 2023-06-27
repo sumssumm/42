@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:34:29 by suminpar          #+#    #+#             */
-/*   Updated: 2023/06/26 17:20:56 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:27:38 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ssize_t	fd_strchr(char *s)
 	while (s != NULL && s[i] != '\0')
 	{
 		if (s[i] == '\n')
-			return (i);
+			return (1);
 		i++;
 	}
 	return (-1);
@@ -53,14 +53,14 @@ int	ft_free(char *result, char **backup, char **buffer, char **line)
 
 char	*ft_read_line(int fd, char **buffer, char **backup)
 {
-	int		read_size;
-	char	*tmp;
+	ssize_t		read_size;
+	char		*tmp;
 
 	read_size = 1;
 	while (read_size)
 	{
 		read_size = read(fd, *buffer, BUFFER_SIZE);
-		if (read_size < 0)
+		if (read_size == -1)
 			return (NULL);
 		(*buffer)[read_size] = '\0';
 		if (read_size == 0)
@@ -73,7 +73,7 @@ char	*ft_read_line(int fd, char **buffer, char **backup)
 		if (tmp == NULL)
 			return (NULL);
 		*backup = tmp;
-		if (fd_strchr(*buffer) != -1)
+		if (fd_strchr(*buffer) == 1)
 			break ;
 	}
 	(void)ft_free(NULL, NULL, buffer, NULL);
@@ -82,11 +82,11 @@ char	*ft_read_line(int fd, char **buffer, char **backup)
 
 char	*ft_backup_line(char **line)
 {
-	int		i;
-	char	*result;
+	size_t		i;
+	char		*result;
 
 	i = 0;
-	if (*line == NULL || (*line && (*line)[0] == '\0'))
+	if (*line == NULL || (*line)[0] == '\0')
 		return (NULL);
 	while ((*line)[i] != '\n' && (*line)[i] != '\0')
 		i++;
@@ -125,29 +125,3 @@ char	*get_next_line(int fd)
 		return (NULL);
 	return (buffer);
 }
-
-// #include <fcntl.h>
-// #include <stdio.h>
-
-// int main(void)
-// {
-// 	int fd;
-
-// 	fd = 0;
-// 	fd = open("./test.txt", O_RDONLY);
-
-// 	char *line = get_next_line(fd);
-// 	printf("%p\n", line);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%p\n", line);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%p\n", line);
-// 	printf("%s", line);
-// 	line = get_next_line(fd);
-// 	printf("%p\n", line);
-// 	printf("%s", line);
-
-// 	return (0);
-// }
