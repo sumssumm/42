@@ -6,13 +6,13 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:34:29 by suminpar          #+#    #+#             */
-/*   Updated: 2023/06/27 17:27:38 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:37:44 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-ssize_t	fd_strchr(char *s)
+ssize_t	gnl_strchr(char *s)
 {
 	ssize_t	i;
 
@@ -73,7 +73,7 @@ char	*ft_read_line(int fd, char **buffer, char **backup)
 		if (tmp == NULL)
 			return (NULL);
 		*backup = tmp;
-		if (fd_strchr(*buffer) == 1)
+		if (gnl_strchr(*buffer) == 1)
 			break ;
 	}
 	(void)ft_free(NULL, NULL, buffer, NULL);
