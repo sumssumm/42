@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   print_unsigned_decimal.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 23:32:47 by suminpar          #+#    #+#             */
-/*   Updated: 2023/03/22 03:20:35 by suminpar         ###   ########.fr       */
+/*   Created: 2023/07/31 07:57:05 by suminpar          #+#    #+#             */
+/*   Updated: 2023/07/31 10:46:24 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "ft_printf.h"
 
-char	*ft_strchr(const char *s, int c)
-{	
-	int	i;
+int	print_unsigned_decimal(unsigned int nbr)
+{
+	int	len;
+	int	res;
 
-	i = 0;
-	while (s[i] != (char)c)
+	len = 0;
+	if (nbr > 9)
 	{
-		if (s[i] == '\0')
-			return (NULL);
-		i++;
+		res = print_unsigned_decimal(nbr / 10);
+		if (check_error(&res, &len) == -1)
+			return (-1);
+		res = print_unsigned_decimal(nbr % 10);
+		if (check_error(&res, &len) == -1)
+			return (-1);
 	}
-	return ((char *)s + i);
+	else
+	{
+		res = print_char(nbr + '0');
+		if (check_error(&res, &len) == -1)
+			return (-1);
+	}
+	return (len);
 }

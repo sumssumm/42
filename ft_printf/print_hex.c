@@ -1,54 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_decimal.c                                    :+:      :+:    :+:   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 03:57:38 by suminpar          #+#    #+#             */
-/*   Updated: 2023/07/31 11:58:24 by suminpar         ###   ########.fr       */
+/*   Created: 2023/07/31 07:55:16 by suminpar          #+#    #+#             */
+/*   Updated: 2023/07/31 10:47:08 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(long long n)
+int	print_hex(unsigned int nbr, const char format)
 {
-	int			len;
-	int			res;
+	int				len;
+	int				res;
+	char			*hex;
 
 	len = 0;
-	if (n < 0)
+	if (format == 'X')
+		hex = "0123456789ABCDEF";
+	else
+		hex = "0123456789abcdef";
+	if (nbr >= 16)
 	{
-		n *= -1;
-		res = print_char('-');
+		res = print_hex(nbr / 16, format);
 		if (check_error(&res, &len) == -1)
 			return (-1);
-	}
-	if (n >= 10)
-	{
-		res = ft_putnbr(n / 10);
-		if (check_error(&res, &len) == -1)
-			return (-1);
-		res = ft_putnbr(n % 10);
+		res = print_hex(nbr % 16, format);
 		if (check_error(&res, &len) == -1)
 			return (-1);
 	}
 	else
 	{
-		res = print_char(n + '0');
+		res = print_char(hex[nbr]);
 		if (check_error(&res, &len) == -1)
 			return (-1);
 	}
-	return (len);
-}
-
-int	print_decimal(int nbr)
-{
-	int			len;
-	long long	n;	
-
-	n = nbr;
-	len = ft_putnbr(n);
 	return (len);
 }

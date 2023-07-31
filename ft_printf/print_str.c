@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 00:04:08 by suminpar          #+#    #+#             */
-/*   Updated: 2023/07/28 09:39:04 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:44:48 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,19 @@
 int	ft_putstr(char *str)
 {
 	int	i;
+	int	len;
+	int	res;
 
 	i = 0;
+	len = 0;
 	while (str[i] != '\0')
 	{
-		// write(1, &str[i], 1);
-		ft_putchar(str[i]);
+		res = print_char(str[i]);
+		if (check_error(&res, &len) == -1)
+			return (-1);
 		i++;
 	}
-	return (i);
+	return (len);
 }
 
 int	print_str(char *str)
@@ -36,5 +40,7 @@ int	print_str(char *str)
 		return (len);
 	}
 	len = ft_putstr(str);
+	if (len == -1)
+		return (-1);
 	return (len);
 }

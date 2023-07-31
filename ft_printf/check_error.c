@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 22:47:29 by suminpar          #+#    #+#             */
-/*   Updated: 2023/03/25 05:02:23 by suminpar         ###   ########.fr       */
+/*   Created: 2023/07/31 10:35:44 by suminpar          #+#    #+#             */
+/*   Updated: 2023/07/31 10:58:10 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int	check_error(int *res, int *len)
 {
-	t_list	*tmp;
-
-	if (!del || !lst || !*lst)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
-	}
-	*lst = NULL;
+	if (*res == -1)
+		return (-1);
+	else
+		return (*len += *res);
 }
