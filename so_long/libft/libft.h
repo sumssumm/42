@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:51:10 by suminpar          #+#    #+#             */
-/*   Updated: 2023/03/27 20:49:25 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:28:02 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include "get_next_line.h"
 
 typedef struct s_list
 {

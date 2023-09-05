@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 00:04:08 by suminpar          #+#    #+#             */
-/*   Updated: 2023/08/06 22:33:07 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:39:06 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	print_str(char *str)
 	int	len;
 
 	if (str == 0)
-		return(ft_putstr("(null)"));
+		return (ft_putstr("(null)"));
 	len = ft_putstr(str);
 	if (len == -1)
 		return (-1);

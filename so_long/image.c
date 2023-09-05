@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 05:20:21 by suminpar          #+#    #+#             */
+/*   Updated: 2023/09/05 21:42:03 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long.h"
+
+t_image	save_image(void *mlx_ptr)
+{
+	int		w;
+	int		h;
+	t_image	image;
+
+	image.chara = mlx_xpm_file_to_image(mlx_ptr, "images/chara.xpm", &w, &h);
+	image.col = mlx_xpm_file_to_image(mlx_ptr, "images/col.xpm", &w, &h);
+	image.end = mlx_xpm_file_to_image(mlx_ptr, "images/end.xpm", &w, &h);
+	image.tile = mlx_xpm_file_to_image(mlx_ptr, "images/tile.xpm", &w, &h);
+	image.wall = mlx_xpm_file_to_image(mlx_ptr, "images/wall.xpm", &w, &h);
+	return (image);
+}
+
+void	map_image(t_game *game, int w, int h)
+{
+	if (game->line[h * game->width + w] == '1')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+									game->image.wall, w * 64, h * 64);
+	else if (game->line[h * game->width + w] == 'C')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+									game->image.col, w * 64, h * 64);
+	else if (game->line[h * game->width + w] == 'P')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+									game->image.chara, w * 64, h * 64);
+	else if (game->line[h * game->width + w] == 'E')
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+									game->image.end, w * 64, h * 64);
+	else
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+									game->image.tile, w * 64, h * 64);
+}
+
+void	put_image(t_game *game)
+{
+	size_t	w;
+	size_t	h;
+
+	h = 0;
+	while (h < game->height)
+	{
+		w = 0;
+		while (w < game->width)
+		{
+			map_image(game, w, h);
+			w++;
+		}
+		h++;
+	}
+}

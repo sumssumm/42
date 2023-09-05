@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:34:29 by suminpar          #+#    #+#             */
-/*   Updated: 2023/07/10 18:37:44 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:24:28 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ char	*ft_read_line(int fd, char **buffer, char **backup)
 		if (read_size == 0)
 			break ;
 		if (*backup == NULL)
-			tmp = ft_strdup(*buffer);
+			tmp = gnl_strdup(*buffer);
 		else
-			tmp = ft_strjoin(*backup, *buffer);
+			tmp = gnl_strjoin(*backup, *buffer);
 		(void)ft_free(NULL, backup, NULL, NULL);
 		if (tmp == NULL)
 			return (NULL);
@@ -90,7 +90,7 @@ char	*ft_backup_line(char **line)
 		return (NULL);
 	while ((*line)[i] != '\n' && (*line)[i] != '\0')
 		i++;
-	result = ft_substr(*line, i + 1, ft_strlen(*line) - i);
+	result = gnl_substr(*line, i + 1, gnl_strlen(*line) - i);
 	if (ft_free(result, NULL, NULL, line) == 1)
 		return (NULL);
 	if (result[0] == '\0')
@@ -119,7 +119,7 @@ char	*get_next_line(int fd)
 	backup = ft_backup_line(&line);
 	if (line == NULL)
 		return (NULL);
-	buffer = ft_substr(line, 0, ft_strlen(line));
+	buffer = gnl_substr(line, 0, gnl_strlen(line));
 	ft_free(NULL, NULL, NULL, &line);
 	if (ft_free(buffer, &backup, NULL, NULL) == 1)
 		return (NULL);

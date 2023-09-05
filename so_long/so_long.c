@@ -1,52 +1,39 @@
-#include "mlx/mlx.h"
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 04:57:53 by suminpar          #+#    #+#             */
+/*   Updated: 2023/09/05 21:34:19 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# define X_EVENT_KEY_PRESS			2
-# define X_EVENT_KEY_RELEASE		3
+#include "so_long.h"
 
-# define KEY_ESC		53
-# define KEY_W			13
-# define KEY_A			0
-# define KEY_S			1
-# define KEY_D			2
-
-typedef struct s_param{
-	int		x;
-	int		y;
-}				t_param;
-
-void			param_init(t_param *param)
+int	main(int argc, char **argv)
 {
-	param->x = 3;
-	param->y = 4;
-}
+	t_game	*game;
 
-int				key_press(int keycode, t_param *param)
-{
-	if (keycode == KEY_W)
-		param->y++;
-	else if (keycode == KEY_S)
-		param->y--;
-	else if (keycode == KEY_A)
-		param->x--;
-	else if (keycode == KEY_D)
-		param->x++;
-	else if (keycode == KEY_ESC)
-		exit(0);
-	printf("x: %d, y: %d\n", param->x, param->y);
+	if (argc != 2)
+	{
+		error_message("Need a map.\n");
+		exit(1);
+	}
+	check_name(argv[1]);
+	game = malloc(sizeof(t_game));
+	start_game(game, argv[1]);
+	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &press_key, game);
+	mlx_hook(game->win_ptr, X_EVENT_KEY_EXIT, 0, &quit_game, game);
+	mlx_loop(game->mlx_ptr);
+	free(game);
 	return (0);
 }
 
-int			main(void)
+void	error_message(char *str)
 {
-	void		*mlx;
-	void		*win;
-	t_param		param;
-
-	param_init(&param);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "mlx_project");
-	mlx_hook(win, X_EVENT_KEY_RELEASE, 0, &key_press, &param);
-	mlx_loop(mlx);
+	write(1, "Error\n", 6);
+	write(1, str, ft_strlen(str));
+	exit(1);
 }

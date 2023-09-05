@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 22:44:47 by suminpar          #+#    #+#             */
-/*   Updated: 2023/03/14 23:17:13 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:40:08 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	i = 0;
 	if (dstsize > 0)
 	{
-		while (src[i] && i < dstsize - 1)
+		while (src[i] && i < dstsize - 1 && src[i] != '\n')
 		{
 			dst[i] = src[i];
 			i++;

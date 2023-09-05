@@ -36,7 +36,6 @@ SRCS	=   ./ft_isalpha.c\
 			./get_next_line.c\
 			./get_next_line_utils.c\
 			
-
 B_SRCS	=	./ft_lstnew_bonus.c\
 			./ft_lstadd_front_bonus.c\
 			./ft_lstsize_bonus.c\

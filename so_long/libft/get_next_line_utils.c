@@ -6,13 +6,13 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:34:23 by suminpar          #+#    #+#             */
-/*   Updated: 2023/06/26 20:35:51 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/08/31 11:25:17 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+char	*gnl_strdup(const char *s1)
 {
 	int		i;
 	char	*dest;
@@ -33,7 +33,7 @@ char	*ft_strdup(const char *s1)
 	return (dest);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	*gnl_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t			i;
 
@@ -48,7 +48,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char const *s1, char const *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -56,18 +56,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
+	s1_len = gnl_strlen(s1);
+	s2_len = gnl_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
 	if (str == NULL)
 		return (NULL);
-	(void)ft_memcpy(str, s1, s1_len);
-	(void)ft_memcpy(str + s1_len, s2, s2_len);
+	(void)gnl_memcpy(str, s1, s1_len);
+	(void)gnl_memcpy(str + s1_len, s2, s2_len);
 	str[s1_len + s2_len] = '\0';
 	return (str);
 }
 
-char	*ft_substr(char const *s, size_t start, size_t len)
+char	*gnl_substr(char const *s, size_t start, size_t len)
 {
 	size_t	i;
 	size_t	s_len;
@@ -76,9 +76,9 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	s_len = ft_strlen(s);
+	s_len = gnl_strlen(s);
 	if (s_len <= start)
-		return (ft_strdup(""));
+		return (gnl_strdup(""));
 	if (s_len >= len + start)
 		short_len = len;
 	else
@@ -96,7 +96,7 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 	return (str);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	size_t	i;
 

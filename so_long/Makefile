@@ -5,7 +5,12 @@ MLX			= -Lmlx -lmlx -framework OpenGL -framework Appkit
 LIB			= -Llibft -lft
 PRINTF		= -Lft_printf -lftprintf
 
-SRCS		= so_long.c
+SRCS		=	so_long.c \
+				game.c \
+				image.c \
+				map.c \
+				move.c \
+				check.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -14,7 +19,7 @@ HEADER 	= .
 all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-	make -C ./mlx/ && make -C ./libft/ && make -C ./ft_printf/
+	make -C ./libft/ && make -C ./ft_printf/
 	$(CC) $(OBJS) $(MLX) $(LIB) $(PRINTF) -o $(NAME)
 
 %.o	:	%.c
@@ -22,7 +27,7 @@ $(NAME)	:	$(OBJS)
 
 clean:
 	rm -rf $(OBJS)
-	make clean -C ./libft/ && make clean -C ./ft_printf/ && make clean -C ./mlx/
+	make clean -C ./libft/ && make clean -C ./ft_printf/
 
 fclean: clean
 	rm -rf $(NAME)
