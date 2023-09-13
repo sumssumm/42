@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_EXIT		17
@@ -53,8 +54,10 @@ typedef struct s_game
 	int		collectible;
 	int		all_col;
 	int		move;
-	char	*line;
+	int		pos_x;
+	int		pos_y;
 	char	**map;
+	char	**copy;
 	t_image	image;
 }	t_game;
 
@@ -75,11 +78,20 @@ void	move_down(t_game *game);
 void	move_right(t_game *game);
 
 void	check_name(char *filename);
-void	check_file(int fd, char *filename);
+void	check_file(t_game *game, char *filename);
+void	 check_shape(t_game *game);
 void	check_wall(t_game *game);
 void	check_component(t_game *game);
 void	check_map(t_game *game);
 
-void	read_map(t_game *game, char *mapfile);
+void	read_map(t_game *game, char *file);
+
+void	check_path(t_game *game);
+void	error_path(t_game *game);
+void	dfs(t_game *game, size_t x, size_t y);
+void	duplicate_map(t_game *game);
+
+
+
 
 #endif

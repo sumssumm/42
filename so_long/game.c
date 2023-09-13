@@ -12,26 +12,34 @@
 
 #include "so_long.h"
 
-void	start_game(t_game *game, char *map)
+void start_game(t_game *game, char *file)
 {
+	read_map(game, file);
+	check_map(game);
 	game->mlx_ptr = mlx_init();
 	game->image = save_image(game->mlx_ptr);
-	read_map(game, map);
-	check_map(game);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width * 64, \
-												game->height * 64, "so_long");
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->width * 64,
+								   game->height * 64, "so_long");
 	put_image(game);
 }
 
-int	quit_game(t_game *game)
+int quit_game(t_game *game)
 {
-	mlx_clear_window(game->mlx_ptr, game->win_ptr);
+	size_t	i;
+
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free(game->line);
+	i = 0;
+	while (i < game->height)
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
+	free(game);
 	exit(0);
 }
 
-int	press_key(int keycode, t_game *game)
+int press_key(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		quit_game(game);
@@ -46,12 +54,20 @@ int	press_key(int keycode, t_game *game)
 	return (0);
 }
 
-int	clear_game(t_game *game)
+int clear_game(t_game *game)
 {
+	size_t	i;
+
 	game->move++;
 	ft_printf("%d moves.\n!!clear!!\n", game->move);
-	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	free(game->line);
+	i = 0;
+	while (i < game->height)
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
+	free(game);
 	exit(0);
 }

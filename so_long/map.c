@@ -12,46 +12,36 @@
 
 #include "so_long.h"
 
-void	read_map(t_game *game, char *filename)
+void read_map(t_game *game, char *file)
 {
-	int		fd;
-	char	*map;
+	int i;
+	int fd;
+	char *map;
 
-	fd = open(filename, O_RDONLY);
-	check_file(fd, filename);
+	check_file(game, file);
+	game->map = malloc(sizeof(char *) * game->height);
+	if (game->map == NULL)
+		error_message("Fail malloc.\n");
+	fd = open(file, O_RDONLY);
 	map = get_next_line(fd);
 	game->width = ft_strlen(map) - 1;
-	game->height = 0;
 	game->move = 0;
-	game->line = ft_strdup(map);
+	game->collectible = 0;
+	game->all_col = 0;
+	i = 0;
 	while (map)
 	{
-		game->height++;
-		free(map);
+		game->map[i] = map;
 		map = get_next_line(fd);
-		game->line = ft_strjoin(game->line, map);
+		i++;
 	}
 	close(fd);
 }
 
-void	check_map(t_game *game)
+void check_map(t_game *game)
 {
-	int	i;
-	int	m_len;
-
-	if (game->width * game->height != ft_strlen(game->line))
-		error_message("The map must be rectangular.\n");
-	i = 0;
-	m_len = ft_strlen(game->line);
-	while (i < m_len)
-	{
-		if (game->line[i] != '1' && game->line[i] != '0' \
-			&& game->line[i] != 'P' && game->line[i] != 'C' \
-			&& game->line[i] != 'E')
-			error_message("Invalid components.\n");
-		i++;
-	}
+	check_shape(game);
 	check_wall(game);
 	check_component(game);
-	// check_path(game);
+	check_path(game);
 }

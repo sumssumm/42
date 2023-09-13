@@ -12,26 +12,24 @@
 
 #include "so_long.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game	*game;
+	t_game *game;
 
 	if (argc != 2)
-	{
 		error_message("Need a map.\n");
-		exit(1);
-	}
 	check_name(argv[1]);
 	game = malloc(sizeof(t_game));
+	if (game == NULL)
+		error_message("Fail malloc.\n");
 	start_game(game, argv[1]);
 	mlx_hook(game->win_ptr, X_EVENT_KEY_PRESS, 0, &press_key, game);
 	mlx_hook(game->win_ptr, X_EVENT_KEY_EXIT, 0, &quit_game, game);
 	mlx_loop(game->mlx_ptr);
-	free(game);
 	return (0);
 }
 
-void	error_message(char *str)
+void error_message(char *str)
 {
 	write(1, "Error\n", 6);
 	write(1, str, ft_strlen(str));

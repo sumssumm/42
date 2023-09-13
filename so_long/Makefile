@@ -9,8 +9,10 @@ SRCS		=	so_long.c \
 				game.c \
 				image.c \
 				map.c \
-				move.c \
-				check.c
+				check.c	\
+				key.c \
+				path.c
+				
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -20,7 +22,7 @@ all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 	make -C ./libft/ && make -C ./ft_printf/
-	$(CC) $(OBJS) $(MLX) $(LIB) $(PRINTF) -o $(NAME)
+	$(CC) $(OBJS) $(MLX) $(LIB) $(PRINTF) -o $(NAME) -fsanitize=address
 
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
