@@ -6,28 +6,25 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 07:40:30 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/05 22:05:57 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/15 04:21:35 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void read_map(t_game *game, char *file)
+void	read_map(t_game *game, char *file)
 {
-	int i;
-	int fd;
-	char *map;
+	int		i;
+	int		fd;
+	char	*map;
 
 	check_file(game, file);
-	game->map = malloc(sizeof(char *) * game->height);
+	game->map = ft_calloc(game->height, sizeof(char *));
 	if (game->map == NULL)
-		error_message("Fail malloc.\n");
+		error_message("Fail malloc.\n", game);
 	fd = open(file, O_RDONLY);
 	map = get_next_line(fd);
 	game->width = ft_strlen(map) - 1;
-	game->move = 0;
-	game->collectible = 0;
-	game->all_col = 0;
 	i = 0;
 	while (map)
 	{
@@ -38,8 +35,25 @@ void read_map(t_game *game, char *file)
 	close(fd);
 }
 
-void check_map(t_game *game)
+void	check_map(t_game *game)
 {
+	size_t	x;
+	size_t	y;
+
+	y = 0;
+	while (y < game->height)
+	{
+		x = 0;
+		while (x < game->width)
+		{
+			if (game->map[y][x] != '1' && game->map[y][x] != '0' \
+				&& game->map[y][x] != 'P' && game->map[y][x] != 'C' \
+				&& game->map[y][x] != 'E')
+				error_message("Not accepted components.\n", game);
+			x++;
+		}
+		y++;
+	}
 	check_shape(game);
 	check_wall(game);
 	check_component(game);

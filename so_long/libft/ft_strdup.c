@@ -24,7 +24,7 @@ char	*ft_strdup(const char *s1)
 	if (!dest)
 		return (0);
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s1[i] != '\n')
 	{
 		dest[i] = s1[i];
 		i++;

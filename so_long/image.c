@@ -6,17 +6,17 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 05:20:21 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/05 21:42:03 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/15 01:55:14 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_image save_image(void *mlx_ptr)
+t_image	save_image(void *mlx_ptr)
 {
-	int w;
-	int h;
-	t_image image;
+	int		w;
+	int		h;
+	t_image	image;
 
 	image.chara = mlx_xpm_file_to_image(mlx_ptr, "images/chara.xpm", &w, &h);
 	image.col = mlx_xpm_file_to_image(mlx_ptr, "images/col.xpm", &w, &h);
@@ -26,33 +26,33 @@ t_image save_image(void *mlx_ptr)
 	return (image);
 }
 
-void map_image(t_game *game, int w, int h)
+void	map_image(t_game *game, int w, int h)
 {
 	if (game->map[h][w] == '1')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
-								  game->image.wall, w * 64, h * 64);
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
+								game->image.wall, w * 64, h * 64);
 	else if (game->map[h][w] == 'C')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 								game->image.col, w * 64, h * 64);
 	else if (game->map[h][w] == 'P')
 	{
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 								game->image.chara, w * 64, h * 64);
 		game->pos_x = w;
 		game->pos_y = h;
 	}
 	else if (game->map[h][w] == 'E')
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 								game->image.end, w * 64, h * 64);
 	else
-		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 								game->image.tile, w * 64, h * 64);
 }
 
-void put_image(t_game *game)
+void	put_image(t_game *game)
 {
-	size_t w;
-	size_t h;
+	size_t	w;
+	size_t	h;
 
 	h = 0;
 	while (h < game->height)

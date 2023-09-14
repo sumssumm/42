@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:46:27 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/05 22:05:49 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/15 04:33:37 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ typedef struct s_image
 	void	*wall;
 }	t_image;
 
-typedef struct s_check
-{
-	char	**visited;
-} t_check;
-
-
 typedef struct s_game
 {
 	void	*mlx_ptr;
@@ -61,11 +55,11 @@ typedef struct s_game
 	t_image	image;
 }	t_game;
 
-void	error_message(char *str);
-
+t_game	*game_generate(void);
+void	error_message(char *str, t_game *game);
 void	start_game(t_game *game, char *map);
 int		press_key(int key_code, t_game *game);
-int		clear_game(t_game *game);
+void	clear_game(t_game *game);
 int		quit_game(t_game *game);
 
 t_image	save_image(void *mlx_ptr);
@@ -79,16 +73,15 @@ void	move_right(t_game *game);
 
 void	check_name(char *filename);
 void	check_file(t_game *game, char *filename);
-void	 check_shape(t_game *game);
+void	check_shape(t_game *game);
 void	check_wall(t_game *game);
 void	check_component(t_game *game);
 void	check_map(t_game *game);
 
 void	read_map(t_game *game, char *file);
-
 void	check_path(t_game *game);
 void	error_path(t_game *game);
-void	dfs(t_game *game, size_t x, size_t y);
+void	find_path(t_game *game, size_t x, size_t y);
 void	duplicate_map(t_game *game);
 
 
