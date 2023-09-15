@@ -32,9 +32,11 @@ int	quit_game(t_game *game)
 	while (i < game->height)
 	{
 		free(game->map[i]);
+		free(game->copy[i]);
 		i++;
 	}
 	free(game->map);
+	free(game->copy);
 	free(game);
 	exit(0);
 }
@@ -65,9 +67,11 @@ void	clear_game(t_game *game)
 	while (i < game->height)
 	{
 		free(game->map[i]);
+		free(game->copy[i]);
 		i++;
 	}
 	free(game->map);
+	free(game->copy);
 	free(game);
 	exit(0);
 }
