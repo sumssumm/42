@@ -1,9 +1,8 @@
 NAME		= so_long
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror
 MLX			= -Lmlx -lmlx -framework OpenGL -framework Appkit
 LIB			= -Llibft -lft
-PRINTF		= -Lft_printf -lftprintf
 
 SRCS		=	so_long.c \
 				game.c \
@@ -21,19 +20,19 @@ HEADER 	= .
 all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-	make -C ./libft/ && make -C ./ft_printf/
-	$(CC) $(OBJS) $(MLX) $(LIB) $(PRINTF) -o $(NAME) -fsanitize=address
+	make -C ./libft/
+	$(CC) $(OBJS) $(MLX) $(LIB) -o $(NAME)
 
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
 
 clean:
 	rm -rf $(OBJS)
-	make clean -C ./libft/ && make clean -C ./ft_printf/
+	make clean -C ./libft/
 
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -C ./libft/ && make fclean -C ./ft_printf/
+	make fclean -C ./libft/
 
 re: 
 	make fclean

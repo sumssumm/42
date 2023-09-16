@@ -6,20 +6,19 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 11:46:27 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/15 04:33:37 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:01:55 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "./mlx/mlx.h"
-# include "./ft_printf/ft_printf.h"
-# include "./libft/libft.h"
-# include <fcntl.h>
+# include "mlx/mlx.h"
+# include "libft/libft.h"
+
 # include <unistd.h>
+# include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_EXIT		17
@@ -62,7 +61,7 @@ int		press_key(int key_code, t_game *game);
 void	clear_game(t_game *game);
 int		quit_game(t_game *game);
 
-t_image	save_image(void *mlx_ptr);
+t_image	save_image(t_game *game);
 void	map_image(t_game *game, int w, int h);
 void	put_image(t_game *game);
 
@@ -83,8 +82,5 @@ void	check_path(t_game *game);
 void	error_path(t_game *game);
 void	find_path(t_game *game, size_t x, size_t y);
 void	duplicate_map(t_game *game);
-
-
-
 
 #endif

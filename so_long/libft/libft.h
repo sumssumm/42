@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 00:51:10 by suminpar          #+#    #+#             */
-/*   Updated: 2023/08/31 11:28:02 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/16 12:01:51 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include "get_next_line.h"
+# include "ft_printf.h"
 
 typedef struct s_list
 {

@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 01:57:59 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/15 04:23:45 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:54:11 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,13 @@ void	find_path(t_game *game, size_t x, size_t y)
 		|| (game->copy[y][x] != '0' && game->copy[y][x] != 'E' \
 		&& game->copy[y][x] != 'P' && game->copy[y][x] != 'C'))
 		return ;
-	game->copy[y][x] = '1';
+	if (game->copy[y][x] == 'E')
+	{
+		game->copy[y][x] = '1';
+		return ;
+	}
+	else
+		game->copy[y][x] = '1';
 	if (game->copy[y][x - 1] != '1')
 		find_path(game, x - 1, y);
 	if (game->copy[y][x + 1] != '1')

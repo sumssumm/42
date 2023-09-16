@@ -6,23 +6,31 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 05:20:21 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/15 01:55:14 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:58:41 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_image	save_image(void *mlx_ptr)
+t_image	save_image(t_game *game)
 {
 	int		w;
 	int		h;
 	t_image	image;
 
-	image.chara = mlx_xpm_file_to_image(mlx_ptr, "images/chara.xpm", &w, &h);
-	image.col = mlx_xpm_file_to_image(mlx_ptr, "images/col.xpm", &w, &h);
-	image.end = mlx_xpm_file_to_image(mlx_ptr, "images/end.xpm", &w, &h);
-	image.tile = mlx_xpm_file_to_image(mlx_ptr, "images/tile.xpm", &w, &h);
-	image.wall = mlx_xpm_file_to_image(mlx_ptr, "images/wall.xpm", &w, &h);
+	image.chara = mlx_xpm_file_to_image(game->mlx_ptr, \
+										"images/chara.xpm", &w, &h);
+	image.col = mlx_xpm_file_to_image(game->mlx_ptr, \
+										"images/col.xpm", &w, &h);
+	image.end = mlx_xpm_file_to_image(game->mlx_ptr, \
+										"images/end.xpm", &w, &h);
+	image.tile = mlx_xpm_file_to_image(game->mlx_ptr, \
+										"images/tile.xpm", &w, &h);
+	image.wall = mlx_xpm_file_to_image(game->mlx_ptr, \
+										"images/wall.xpm", &w, &h);
+	if (image.chara == NULL || image.col == NULL || image.end == NULL \
+		|| image.tile == NULL || image.wall == NULL)
+		error_message("Fail mlx_xpm_file_to_image.\n", game);
 	return (image);
 }
 

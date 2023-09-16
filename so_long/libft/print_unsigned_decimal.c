@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_unsigned_decimal.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/28 00:04:08 by suminpar          #+#    #+#             */
-/*   Updated: 2023/08/31 11:39:06 by suminpar         ###   ########.fr       */
+/*   Created: 2023/07/31 07:57:05 by suminpar          #+#    #+#             */
+/*   Updated: 2023/09/16 11:44:13 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (write(1, str, i));
-}
-
-int	print_str(char *str)
+int	print_unsigned_decimal(unsigned int nbr)
 {
 	int	len;
+	int	res;
 
-	if (str == 0)
-		return (ft_putstr("(null)"));
-	len = ft_putstr(str);
-	if (len == -1)
-		return (-1);
+	len = 0;
+	if (nbr > 9)
+	{
+		res = print_unsigned_decimal(nbr / 10);
+		if (check_error(res, &len) == -1)
+			return (-1);
+		res = print_unsigned_decimal(nbr % 10);
+		if (check_error(res, &len) == -1)
+			return (-1);
+	}
+	else
+	{
+		res = print_char(nbr + '0');
+		if (check_error(res, &len) == -1)
+			return (-1);
+	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 07:40:30 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/15 04:21:35 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:56:03 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	check_map(t_game *game)
 	size_t	x;
 	size_t	y;
 
+	check_shape(game);
+	check_wall(game);
 	y = 0;
 	while (y < game->height)
 	{
@@ -54,8 +56,6 @@ void	check_map(t_game *game)
 		}
 		y++;
 	}
-	check_shape(game);
-	check_wall(game);
 	check_component(game);
 	check_path(game);
 }

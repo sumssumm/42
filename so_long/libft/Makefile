@@ -35,6 +35,14 @@ SRCS	=   ./ft_isalpha.c\
 			./ft_putnbr_fd.c\
 			./get_next_line.c\
 			./get_next_line_utils.c\
+			./ft_printf.c				\
+			./print_char.c				\
+			./print_str.c				\
+			./print_ptr.c				\
+			./print_decimal.c			\
+			./print_unsigned_decimal.c	\
+			./print_hex.c				\
+			./check_error.c				\
 			
 B_SRCS	=	./ft_lstnew_bonus.c\
 			./ft_lstadd_front_bonus.c\
