@@ -20,7 +20,7 @@ HEADER 	= .
 all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
-	make -C ./libft/
+	make -C ./mlx/ && make -C ./libft/
 	$(CC) $(OBJS) $(MLX) $(LIB) -o $(NAME)
 
 %.o	:	%.c
@@ -28,10 +28,12 @@ $(NAME)	:	$(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	make clean -C ./mlx/
 	make clean -C ./libft/
 
 fclean: clean
 	rm -rf $(NAME)
+	make clean -C ./mlx/
 	make fclean -C ./libft/
 
 re: 

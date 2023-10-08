@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 05:20:21 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/16 13:58:41 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:15:24 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ t_image	save_image(t_game *game)
 	t_image	image;
 
 	image.chara = mlx_xpm_file_to_image(game->mlx_ptr, \
-										"images/chara.xpm", &w, &h);
+										"textures/chara.xpm", &w, &h);
 	image.col = mlx_xpm_file_to_image(game->mlx_ptr, \
-										"images/col.xpm", &w, &h);
+										"textures/col.xpm", &w, &h);
 	image.end = mlx_xpm_file_to_image(game->mlx_ptr, \
-										"images/end.xpm", &w, &h);
+										"textures/end.xpm", &w, &h);
 	image.tile = mlx_xpm_file_to_image(game->mlx_ptr, \
-										"images/tile.xpm", &w, &h);
+										"textures/tile.xpm", &w, &h);
 	image.wall = mlx_xpm_file_to_image(game->mlx_ptr, \
-										"images/wall.xpm", &w, &h);
+										"textures/wall.xpm", &w, &h);
 	if (image.chara == NULL || image.col == NULL || image.end == NULL \
 		|| image.tile == NULL || image.wall == NULL)
 		error_message("Fail mlx_xpm_file_to_image.\n", game);

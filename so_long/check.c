@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 19:38:03 by suminpar          #+#    #+#             */
-/*   Updated: 2023/09/15 04:21:56 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:01:21 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	check_wall(t_game *game)
 			error_message("Invalid wall.\n", game);
 		x++;
 	}
+	if (x > 40)
+		error_message("Invalid size.\n", game);
 	y = 0;
 	while (y < game->height)
 	{
@@ -92,6 +94,8 @@ void	check_wall(t_game *game)
 			error_message("Invalid wall.\n", game);
 		y++;
 	}
+	if (y > 21)
+		error_message("Invalid size.\n", game);
 }
 
 void	check_component(t_game *game)
