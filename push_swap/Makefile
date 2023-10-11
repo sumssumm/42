@@ -1,9 +1,11 @@
 NAME		= push_swap
 CC			= cc
-CFLAGS		= -Wall -Wextra
+CFLAGS		= -Wall -Wextra -Werror
 LIB			= -Llibft -lft
 
-SRCS		=	push_swap.c	\
+SRCS		=	push_swap.c		\
+				operation.c		\
+				operation2.c	\
 
 OBJS		= $(SRCS:.c=.o)
 
