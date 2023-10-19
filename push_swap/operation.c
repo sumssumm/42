@@ -12,35 +12,35 @@
 
 #include "push_swap.h"
 
-void	sa(t_stack *stack)
+void	sa(t_stack *stack_a)
 {
-	t_node	*top;
-	int		top1;
-	int		top2;
+	t_node	*top1;
+	t_node	*top2;
+	int		tmp;
 
-	top = stack->head->next;
-	if (top != stack->tail && top != stack->tail)
+	top1 = stack_a->head->next;
+	top2 = top1->next;
+	if (top1 != stack_a->tail && top1 != stack_a->tail)
 	{
-		top1 = top->data;
-		top2 = top->next->data;
-		top->data = top2;
-		top->next->data = top1;
+		tmp = top1->data;
+		top1->data = top2->data;
+		top2->data = tmp;
 	}
 }
 
-void	sb(t_stack *stack)
+void	sb(t_stack *stack_b)
 {
-	t_node	*top;
-	int		top1;
-	int		top2;
+	t_node	*top1;
+	t_node	*top2;
+	int		tmp;
 
-	top = stack->head->next;
-	if (top != stack->tail && top != stack->tail)
+	top1 = stack_b->head->next;
+	top2 = top1->next;
+	if (top1 != stack_b->tail && top1 != stack_b->tail)
 	{
-		top1 = top->data;
-		top2 = top->next->data;
-		top->data = top2;
-		top->next->data = top1;
+		tmp = top1->data;
+		top1->data = top2->data;
+		top2->data = tmp;
 	}
 }
 

@@ -6,6 +6,9 @@ LIB			= -Llibft -lft
 SRCS		=	push_swap.c		\
 				operation.c		\
 				operation2.c	\
+				operation3.c	\
+				stack.c			\
+				sort.c			\
 
 OBJS		= $(SRCS:.c=.o)
 
