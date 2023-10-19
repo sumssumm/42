@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:40:28 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/11 21:53:44 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/20 01:37:53 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,20 @@ void	check_leaks(void)
 	system("leaks --list push_swap");
 }
 
-void printStack(t_stack *stack) {
-    t_node *current = stack->head->next;
-    while (current != stack->tail) {
-        ft_printf("%d ", current->data);
-        current = current->next;
-    }
-    ft_printf("\n");
+void	print_stack(t_stack *stack)
+{
+	t_node	*current;
+
+	current = stack->head->next;
+	while (current != stack->tail)
+	{
+		ft_printf("%d ", current->data);
+		current = current->next;
+	}
+	ft_printf("\n");
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
@@ -42,12 +46,15 @@ int main(int argc, char **argv)
 	{
 		data = ft_atoi(argv[i]);
 		push(stack_a, data);
+		stack_a->size++;
 		i--;
 	}
-  	ft_printf("Stack A: ");
-    printStack(stack_a);
-
+	sort_five(stack_a, stack_b);
+	ft_printf("Stack A: ");
+	print_stack(stack_a);
+	ft_printf("Stack B: ");
+	print_stack(stack_b);
+	ft_printf("a : %d b : %d\n", stack_a->size, stack_b->size);
 	atexit(check_leaks);
-
-    return 0;
+	return (0);
 }

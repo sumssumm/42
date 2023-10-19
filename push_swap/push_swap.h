@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 17:17:57 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/11 22:36:33 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/20 04:28:50 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ typedef struct s_stack
 {
 	t_node	*head;
 	t_node	*tail;
+	int		size;
 }	t_stack;
 
-int	push(t_stack *stack, int data);  // 스택에 요소를 푸시하는 함수
-int	pop(t_stack *stack);
-int	peek(t_stack *stack);
+int		push(t_stack *stack, int data);
+int		pop(t_stack *stack);
+// int		peek(t_stack *stack);
 t_node	*get_node(int data);
-int	init_stack(t_stack **stack);
+int		init_stack(t_stack **stack);
 
 void	sa(t_stack *stack_a);
 void	sb(t_stack *stack_b);
@@ -48,10 +49,11 @@ void	rra(t_stack *stack_a);
 void	rrb(t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
 
+void	sort_two(t_stack *stack_a);
+void	sort_three(t_stack *stack_a);
+void	sort_five(t_stack *stack_a, t_stack *stack_b);
 
-
-
-
+int		find_min(t_stack *stack, int *max);
 
 
 

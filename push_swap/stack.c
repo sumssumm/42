@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 23:00:40 by suminpar          #+#    #+#             */
+/*   Updated: 2023/10/19 23:18:51 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 // void	delete(t_node *node, int data)
@@ -21,10 +33,10 @@
 // 	return (NULL);
 // }
 
-int	push(t_stack *stack, int data)  // 스택에 요소를 푸시하는 함수
+int	push(t_stack *stack, int data)
 {
 	t_node	*node;
-	
+
 	node = get_node(data);
 	if (node == NULL)
 		return (-1);
@@ -35,7 +47,7 @@ int	push(t_stack *stack, int data)  // 스택에 요소를 푸시하는 함수
 	return (1);
 }
 
-int	pop(t_stack *stack) // 스택에서 요소를 팝하는 함수
+int	pop(t_stack *stack)
 {
 	t_node	*tmp;
 	int		data;
@@ -53,17 +65,17 @@ int	pop(t_stack *stack) // 스택에서 요소를 팝하는 함수
 	return (data);
 }
 
-int	peek(t_stack *stack) // 스택 상단 요소를 반환하는 함수(팝하지 않고)
-{
-	if (stack->head->next == stack->tail)
-	{
-		ft_printf("empty stack\n");
-		return (-1);
-	}
-	return (stack->head->next->data);
-}
+// int	peek(t_stack *stack)
+// {
+// 	if (stack->head->next == stack->tail)
+// 	{
+// 		ft_printf("empty stack\n");
+// 		return (-1);
+// 	}
+// 	return (stack->head->next->data);
+// }
 
-t_node	*get_node(int data)  // 새로운 노드를 생성하고 값을 설정
+t_node	*get_node(int data)
 {
 	t_node	*node;
 
@@ -87,5 +99,6 @@ int	init_stack(t_stack **stack)
 		return (-1);
 	(*stack)->head->next = (*stack)->tail;
 	(*stack)->tail->prev = (*stack)->head;
+	(*stack)->size = 0;
 	return (1);
 }
