@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 22:56:38 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/19 22:56:40 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/24 06:38:56 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	rra(t_stack *stack_a)
 		last->next = top;
 		top->prev = last;
 	}
+	ft_printf("rra\n");
 }
 
 void	rrb(t_stack *stack_b)
@@ -50,10 +51,12 @@ void	rrb(t_stack *stack_b)
 		last->next = top;
 		top->prev = last;
 	}
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
 	rra(stack_a);
 	rrb(stack_b);
+	ft_printf("rrr\n");
 }

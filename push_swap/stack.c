@@ -6,32 +6,11 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:00:40 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/19 23:18:51 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/24 07:03:24 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// void	delete(t_node *node, int data)
-// {
-// 	node = search(node, data);
-// 	node->prev->next = node->next;
-// 	node->next->prev = node->prev;
-// 	free(node);
-// }
-
-// t_node	*search(t_node *node, int data)
-// {
-// 	node = node->next;
-
-// 	while (node->next)
-// 	{
-// 		if (node->data == data)
-// 			return (node);
-// 		node = node->next;
-// 	}
-// 	return (NULL);
-// }
 
 int	push(t_stack *stack, int data)
 {
@@ -65,16 +44,6 @@ int	pop(t_stack *stack)
 	return (data);
 }
 
-// int	peek(t_stack *stack)
-// {
-// 	if (stack->head->next == stack->tail)
-// 	{
-// 		ft_printf("empty stack\n");
-// 		return (-1);
-// 	}
-// 	return (stack->head->next->data);
-// }
-
 t_node	*get_node(int data)
 {
 	t_node	*node;
@@ -99,6 +68,22 @@ int	init_stack(t_stack **stack)
 		return (-1);
 	(*stack)->head->next = (*stack)->tail;
 	(*stack)->tail->prev = (*stack)->head;
-	(*stack)->size = 0;
+	(*stack)->size_a = 0;
+	(*stack)->size_b = 0;
 	return (1);
+}
+
+int	stack_size(t_stack *stack)
+{
+	int		size;
+	t_node	*node;
+
+	node = stack->head->next;
+	size = 0;
+	while (node != stack->tail)
+	{
+		size++;
+		node = node->next;
+	}
+	return (size);
 }

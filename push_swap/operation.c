@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 22:19:49 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/19 22:56:28 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/24 06:38:00 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	sa(t_stack *stack_a)
 		top1->data = top2->data;
 		top2->data = tmp;
 	}
+	ft_printf("sa\n");
 }
 
 void	sb(t_stack *stack_b)
@@ -42,12 +43,14 @@ void	sb(t_stack *stack_b)
 		top1->data = top2->data;
 		top2->data = tmp;
 	}
+	ft_printf("sb\n");
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)
 {
 	sa(stack_a);
 	sb(stack_b);
+	ft_printf("ss\n");
 }
 
 void	pa(t_stack *stack_a, t_stack *stack_b)
@@ -59,6 +62,7 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 		data = pop(stack_b);
 		push(stack_a, data);
 	}
+	ft_printf("pa\n");
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
@@ -70,4 +74,5 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 		data = pop(stack_a);
 		push(stack_b, data);
 	}
+	ft_printf("pb\n");
 }

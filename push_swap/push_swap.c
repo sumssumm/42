@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:40:28 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/20 01:37:53 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/24 07:16:13 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,18 @@ int	main(int argc, char **argv)
 	while (i > 0)
 	{
 		data = ft_atoi(argv[i]);
-		push(stack_a, data);
-		stack_a->size++;
+		if (push(stack_a, data) < 0)
+			return (-1);
+		stack_a->size_a++;
 		i--;
 	}
+	// sort_three(stack_a);
 	sort_five(stack_a, stack_b);
 	ft_printf("Stack A: ");
 	print_stack(stack_a);
 	ft_printf("Stack B: ");
 	print_stack(stack_b);
-	ft_printf("a : %d b : %d\n", stack_a->size, stack_b->size);
+	ft_printf("a : %d b : %d\n", stack_a->size_a, stack_b->size_b);
 	atexit(check_leaks);
 	return (0);
 }
