@@ -26,7 +26,7 @@ void	sa(t_stack *stack_a)
 		top1->data = top2->data;
 		top2->data = tmp;
 	}
-	ft_printf("sa\n");
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_stack *stack_b)

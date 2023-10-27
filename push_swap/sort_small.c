@@ -57,19 +57,17 @@ void	sort_five(t_stack *stack_a, t_stack *stack_b)
 	t_node	*node;
 
 	node = stack_a->head->next;
-	find_min_max(stack_a, &min, &max);
-	while (stack_a->size_a > 0)
+	while (stack_size(stack_a) > 3)
 	{
+		find_min_max(stack_a, &min, &max);
 		node = stack_a->head->next;
 		if (node->data == max || node->data == min)
 			pb(stack_a, stack_b);
 		else
 			ra(stack_a);
-		stack_a->size_a--;
 	}
 	sort_three(stack_a);
-	stack_b->size_b = stack_size(stack_b);
-	while (stack_b->size_b-- > 0)
+	while (stack_size(stack_b)> 0)
 	{
 		pa(stack_a, stack_b);
 		node = stack_a->head->next;

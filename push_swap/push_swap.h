@@ -29,8 +29,8 @@ typedef struct s_stack
 {
 	t_node	*head;
 	t_node	*tail;
-	int		size_a;
-	int		size_b;
+	int		p1;
+	int		p2;
 }	t_stack;
 
 int		push(t_stack *stack, int data);
@@ -51,13 +51,25 @@ void	rra(t_stack *stack_a);
 void	rrb(t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
 
+void	ft_sort(t_stack *stack_a, t_stack *stack_b);
 void	sort_two(t_stack *stack_a);
 void	sort_three(t_stack *stack_a);
 void	sort_five(t_stack *stack_a, t_stack *stack_b);
-void	find_min(t_stack *stack, int *min, int *max);
+void	find_min_max(t_stack *stack, int *min, int *max);
 
+void	sort_stack_b(t_stack *stack_a, t_stack *stack_b);
+void	sort_big(t_stack *stack_a, t_stack *stack_b);
 
+int		check_errors(int argc, char **argv);
+int		check_number(int argc, char **argv);
+int		check_double(int argc, char **argv);
+int		check_asceding(t_stack *stack);
 
+long 	ps_atoi(char *str);
+void	print_error(int	error);
+void	ft_sort_int_tab(int *tab, int size);
+
+void	get_pivot(int size, int *num_arr, t_stack *stack);
 
 
 #endif

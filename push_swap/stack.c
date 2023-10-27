@@ -68,8 +68,6 @@ int	init_stack(t_stack **stack)
 		return (-1);
 	(*stack)->head->next = (*stack)->tail;
 	(*stack)->tail->prev = (*stack)->head;
-	(*stack)->size_a = 0;
-	(*stack)->size_b = 0;
 	return (1);
 }
 

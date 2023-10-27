@@ -8,7 +8,11 @@ SRCS		=	push_swap.c		\
 				operation2.c	\
 				operation3.c	\
 				stack.c			\
-				sort.c			\
+				sort_small.c	\
+				check_errors.c	\
+				utils.c			\
+				utils2.c		\
+				sort_big.c		\
 
 OBJS		= $(SRCS:.c=.o)
 
