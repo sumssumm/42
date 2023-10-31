@@ -22,7 +22,7 @@ all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 	make -C ./libft/
-	$(CC) $(OBJS) $(LIB) -o $(NAME) -fsanitize=address
+	$(CC) $(OBJS) $(LIB) -o $(NAME)
 
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)

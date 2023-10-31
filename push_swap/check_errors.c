@@ -5,7 +5,7 @@ int	check_asceding(t_stack *stack)
 	t_node	*node;
 
 	node = stack->head->next;
-	while(node != stack->tail)
+	while(node != stack->tail->prev)
 	{
 		if (node->data > node->next->data)
 			return (-1);
@@ -14,55 +14,50 @@ int	check_asceding(t_stack *stack)
 	return (0);
 }
 
-int	check_number(int argc, char **argv)
+void	check_number(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < argc - 1)
 	{
 		j = 0;
 		if (argv[i][j] == '\0')
-			return (-1);
+			print_error();
 		while (argv[i][j] != '\0')
 		{
-			if (argv[i][j] == '+' || argv[i][j] == '-')
+			if (argv[i][j] == '+' || argv[i][j] == '-' || argv[i][j] == ' ')
 				j++;
 			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return (-1);
+				print_error();
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }
 
-int	check_double(int argc, char **argv)
+void	check_double(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (i < argc - 1)
 	{
 		j = i + 1;
 		while (j < argc)
 		{
 			if (ps_atoi(argv[i]) == ps_atoi(argv[j]))
-				print_error (-1);
+				print_error ();
 			j++;
 		}
 		i++;
 	}
-	return (0);
 }
 
-int	check_errors(int argc, char **argv)
+void	check_errors(int argc, char **argv)
 {
-	if (check_number(argc, argv) == -1)
-		print_error(-1);
-	if (check_double(argc, argv) == -1)
-		print_error(-1);
-	return (0);
+	check_number(argc, argv);
+	check_double(argc, argv);
 }

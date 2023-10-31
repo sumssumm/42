@@ -12,6 +12,26 @@
 
 #include "push_swap.h"
 
+void	ft_rot(t_stack *stack_a)
+{
+	t_node	*top1;
+	t_node	*top2;
+	t_node	*last;
+
+	top1 = stack_a->head->next;
+	top2 = top1->next;
+	last = stack_a->tail->prev;
+	if (top1 != stack_a->tail && top2 != stack_a->tail)
+	{
+		stack_a->head->next = top2;
+		top2->prev = stack_a->head;
+		last->next = top1;
+		top1->prev = last;
+		top1->next = stack_a->tail;
+		stack_a->tail->prev = top1;
+	}
+}
+
 void	ra(t_stack *stack_a)
 {
 	t_node	*top1;
@@ -56,7 +76,7 @@ void	rb(t_stack *stack_b)
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	ft_rot(stack_a);
+	ft_rot(stack_b);
 	ft_printf("rr\n");
 }
