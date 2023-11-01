@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 22:19:49 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/24 06:38:00 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:46:14 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 	{
 		data = pop(stack_b);
 		push(stack_a, data);
+		ft_printf("pa\n");
 	}
-	ft_printf("pa\n");
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
@@ -73,6 +73,6 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 	{
 		data = pop(stack_a);
 		push(stack_b, data);
+		ft_printf("pb\n");
 	}
-	ft_printf("pb\n");
 }

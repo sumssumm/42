@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 23:01:45 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/24 09:03:32 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:49:02 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	sort_five(t_stack *stack_a, t_stack *stack_b)
 			ra(stack_a);
 	}
 	sort_three(stack_a);
-	while (stack_size(stack_b)> 0)
+	while (stack_size(stack_b) > 0)
 	{
 		pa(stack_a, stack_b);
 		node = stack_a->head->next;

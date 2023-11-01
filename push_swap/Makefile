@@ -13,6 +13,9 @@ SRCS		=	push_swap.c		\
 				utils.c			\
 				utils2.c		\
 				sort_big.c		\
+				sort_big2.c		\
+				sort_big3.c		\
+				free.c			\
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -22,8 +25,7 @@ all:	$(NAME)
 
 $(NAME)	:	$(OBJS)
 	make -C ./libft/
-	$(CC) $(OBJS) $(LIB) -o $(NAME)
-
+	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
 

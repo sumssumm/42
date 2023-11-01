@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_errors.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/31 16:43:52 by suminpar          #+#    #+#             */
+/*   Updated: 2023/11/01 18:24:00 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	check_asceding(t_stack *stack)
@@ -5,7 +17,7 @@ int	check_asceding(t_stack *stack)
 	t_node	*node;
 
 	node = stack->head->next;
-	while(node != stack->tail->prev)
+	while (node != stack->tail->prev)
 	{
 		if (node->data > node->next->data)
 			return (-1);
@@ -20,7 +32,7 @@ void	check_number(int argc, char **argv)
 	int	j;
 
 	i = 0;
-	while (i < argc - 1)
+	while (i < argc)
 	{
 		j = 0;
 		if (argv[i][j] == '\0')
@@ -29,9 +41,10 @@ void	check_number(int argc, char **argv)
 		{
 			if (argv[i][j] == '+' || argv[i][j] == '-' || argv[i][j] == ' ')
 				j++;
-			if (argv[i][j] < '0' || argv[i][j] > '9')
+			else if (argv[i][j] < '0' || argv[i][j] > '9')
 				print_error();
-			j++;
+			else
+				j++;
 		}
 		i++;
 	}

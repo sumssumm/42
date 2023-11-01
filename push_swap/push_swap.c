@@ -6,18 +6,13 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 16:40:28 by suminpar          #+#    #+#             */
-/*   Updated: 2023/10/24 07:16:13 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:51:11 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	check_leaks(void)
-{
-	system("leaks --list push_swap");
-}
-
-void	empty_argv(int argc, char *argv[])
+void	check_argv(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -39,7 +34,6 @@ void	empty_argv(int argc, char *argv[])
 			print_error();
 		i++;
 	}
-	
 }
 
 void	ft_sort(t_stack *stack_a, t_stack *stack_b)
@@ -63,68 +57,10 @@ void	av_to_stack(int argc, char **argv, t_stack *stack, int *arr)
 	while (i >= 0)
 	{
 		data = ps_atoi(argv[i]);
-		arr[i - 1] = data;
-		if (push(stack, data) < 0)
-			print_error();
+		arr[i] = data;
+		push(stack, data);
 		i--;
 	}
-}
-
-char	*first_argv_dup(char **argv)
-{
-	char	*str;
-
-	str = ft_strdup(argv[1]);
-	if (str == NULL)
-		return (NULL);
-	if (ft_strncmp(str, "", 1) == 0)
-		print_error();
-	return (str);
-}
-
-char	*join_argv(int argc, char **argv)
-{
-	char	*tmp;
-	char	*str;
-	int		i;
-
-	i = 1;
-	str = first_argv_dup(argv);
-	if (str == NULL)
-		return (NULL);
-	while (i < argc - 1)
-	{
-		tmp = str;
-		str = ft_strjoin(str, " ");
-		free(tmp);
-		if (str == NULL)
-			return (NULL);
-		tmp = str;
-		str = ft_strjoin(str, argv[i + 1]);
-		free(tmp);
-		if (str == NULL)
-			return (NULL);
-		i++;
-	}
-	return (str);
-}
-
-char	**split_in_num_arr(char *str, int *size)
-{
-	int		i;
-	char	**str_split;
-
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	str_split = ft_split(str, ' ');
-	free(str);
-	if (str_split == NULL)
-		return (NULL);
-	while (str_split[i])
-		i++;
-	*size = i;
-	return (str_split);
 }
 
 int	main(int argc, char **argv)
@@ -136,22 +72,22 @@ int	main(int argc, char **argv)
 	int		size;
 
 	if (argc < 2)
+		return (0);
+	check_argv(argc, argv);
+	init_stack(&stack_a);
+	init_stack(&stack_b);
+	str_split = split_argv(join_argv(argc, argv), &size);
+	if (str_split == NULL)
 		return (-1);
-	empty_argv(argc, argv);
-	if (init_stack(&stack_a) < 0 || init_stack(&stack_b) < 0)
-		return (-1);
-	str_split = split_in_num_arr(join_argv(argc, argv), &size);
 	check_errors(size, str_split);
 	num_arr = (int *)malloc(sizeof(int) * (size));
 	if (num_arr == NULL)
 		return (-1);
 	av_to_stack(size, str_split, stack_a, num_arr);
-	ft_sort_int_tab(num_arr, size);
-	get_pivot(size, num_arr, stack_a);
+	ft_sort_int_tab(num_arr, size, stack_a);
 	if (check_asceding(stack_a) == -1)
 		ft_sort(stack_a, stack_b);
-	// free(stack_a);
-	// atexit(check_leaks);
-	exit(0);
+	split_free(str_split);
+	all_stack_free(stack_a, stack_b);
 	return (0);
 }
