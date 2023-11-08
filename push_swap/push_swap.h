@@ -71,7 +71,7 @@ void	check_number(int argc, char **argv);
 void	check_double(int argc, char **argv);
 int		check_asceding(t_stack *stack);
 
-long	ps_atoi(char *str);
+int		ps_atoi(char *str);
 void	print_error(void);
 void	ft_sort_int_tab(int *tab, int size, t_stack *stack_a);
 void	get_pivot(int size, int *num_arr, t_stack *stack);

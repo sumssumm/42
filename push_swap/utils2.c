@@ -41,27 +41,31 @@ int	ps_move_sign(char *str, int *sign)
 	return (i);
 }
 
-long	ps_atoi(char *str)
+#include <stdio.h>
+
+int	ps_atoi(char *str)
 {
 	int		i;
 	int		sign;
 	long	result;
+	long	tmp;
 
-	i = 0;
 	sign = 1;
 	result = 0;
 	i = ps_move_sign(str, &sign);
-	if (!str[i])
+	if (!str[i--])
 		print_error();
-	while (str[i])
+	while (str[++i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			print_error();
+		tmp = result;
 		result = (result * 10) + (str[i] - '0');
-		i++;
+		if (tmp > result)
+			print_error();
 	}
 	result *= sign;
 	if (result > 2147483647 || result < -2147483648)
 		print_error();
-	return ((int)result);
+	return (result);
 }
