@@ -41,8 +41,6 @@ int	ps_move_sign(char *str, int *sign)
 	return (i);
 }
 
-#include <stdio.h>
-
 int	ps_atoi(char *str)
 {
 	int		i;
