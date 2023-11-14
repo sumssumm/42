@@ -6,11 +6,22 @@ LIBFT		= ./libft/libft.a
 HEADER 	= minitalk.h
 
 SERVER_SRCS	= server.c
-SERVER_OBJS = $(SERVER_SRCS:.c=.o)
 CLIENT_SRCS = client.c
-CLIENT_OBJS = $(CLIENT_SRCS:.c=.o)
+SERVER_BONUS_SRCS = server_bonus.c
+CLIENT_BONUS_SRCS = client_bonus.c
+
+ifdef WITH_BONUS
+	CLIENT_OBJS	= $(CLIENT_BONUS_SRCS:.c=.o)
+	SERVER_OBJS = $(SERVER_BONUS_SRCS:.c=.o)
+else
+	CLIENT_OBJS	= $(CLIENT_SRCS:.c=.o)
+	SERVER_OBJS = $(SERVER_SRCS:.c=.o)
+endif
 
 all:	$(SERVER_NAME) $(CLIENT_NAME)
+
+bonus:
+	@make WITH_BONUS=1 all
 
 $(LIBFT):
 	make -C ./libft/
@@ -25,7 +36,7 @@ $(CLIENT_NAME)	:	$(CLIENT_OBJS) $(LIBFT)
 
 clean:
 	make clean -C ./libft/
-	rm -rf $(SERVER_OBJS) $(CLIENT_OBJS)
+	rm -rf $(SERVER_OBJS) $(CLIENT_OBJS) $(CLIENT_BONUS_SRCS:.c=.o) $(SERVER_BONUS_SRCS:.c=.o)
 
 fclean: clean
 	make fclean -C ./libft/
@@ -35,4 +46,4 @@ re:
 	make fclean
 	make all
 
-.PHONY : all clean fclean re 
+.PHONY : all clean fclean re bonus

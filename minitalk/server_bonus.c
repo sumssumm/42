@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:08:54 by suminpar          #+#    #+#             */
-/*   Updated: 2023/11/14 20:40:36 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/14 21:03:47 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	main(int argc, char **argv)
 	}
 	server_pid = getpid();
 	ft_printf("Server PID: %d\n", server_pid);
-	sa.sa_flags = 0;
 	sa.sa_handler = &signal_handler;
+	sa.sa_flags = 0;
+	// saemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
 	while (1)
