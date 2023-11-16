@@ -12,6 +12,12 @@
 
 #include "minitalk.h"
 
+void	received_sig(int signo)
+{
+	if (signo == SIGUSR1)
+		ft_printf("Received signal from server.\n");
+}
+
 void	send_char(pid_t pid, char c)
 {
 	int	bit;
@@ -42,6 +48,8 @@ int	main(int argc, char **argv)
 	message = argv[2];
 	while (*message)
 	{
+		signal(SIGUSR1, received_sig);
+		signal(SIGUSR2, received_sig);
 		send_char(server_pid, *message);
 		message++;
 	}

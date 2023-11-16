@@ -12,25 +12,28 @@
 
 #include "minitalk.h"
 
-void	signal_handler(int signo)
+void	signal_handler2(int signo, siginfo_t *info, void *context)
 {
 	static int	bit;
 	static int	bit_cnt;
 
+	(void)context;
 	if (signo == SIGUSR1)
 		bit |= (1 << bit_cnt);
 	bit_cnt++;
 	if (bit_cnt == 8)
 	{
 		ft_printf("%c", (unsigned char)bit);
+		if (bit == '\0')
+			kill(info->si_pid, SIGUSR1);
 		bit = 0;
 		bit_cnt = 0;
 	}
 }
 
+
 int	main(int argc, char **argv)
 {
-	pid_t				server_pid;
 	struct sigaction	sa;
 
 	(void)argv;
@@ -39,11 +42,10 @@ int	main(int argc, char **argv)
 		ft_printf("Try only ./server\n");
 		return (0);
 	}
-	server_pid = getpid();
-	ft_printf("Server PID: %d\n", server_pid);
-	sa.sa_handler = &signal_handler;
-	sa.sa_flags = 0;
-	// saemptyset(&sa.sa_mask);
+	ft_printf("Server PID: %d\n", getpid());
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = &signal_handler2;
+	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
 	while (1)

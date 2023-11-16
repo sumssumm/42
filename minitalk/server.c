@@ -30,21 +30,15 @@ void	signal_handler(int signo)
 
 int	main(int argc, char **argv)
 {
-	pid_t				server_pid;
-	struct sigaction	sa;
-
 	(void)argv;
 	if (argc != 1)
 	{
 		ft_printf("Try only ./server\n");
 		return (0);
 	}
-	server_pid = getpid();
-	ft_printf("Server PID: %d\n", server_pid);
-	sa.sa_flags = 0;
-	sa.sa_handler = &signal_handler;
-	sigaction(SIGUSR1, &sa, 0);
-	sigaction(SIGUSR2, &sa, 0);
+	ft_printf("Server PID: %d\n", getpid());
+	signal(SIGUSR1, signal_handler);
+	signal(SIGUSR2, signal_handler);
 	while (1)
 		pause();
 	return (0);
