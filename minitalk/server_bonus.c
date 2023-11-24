@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:08:54 by suminpar          #+#    #+#             */
-/*   Updated: 2023/11/14 21:03:47 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:49:20 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ void	signal_handler2(int signo, siginfo_t *info, void *context)
 	bit_cnt++;
 	if (bit_cnt == 8)
 	{
-		ft_printf("%c", (unsigned char)bit);
+		write(1, &bit, 1);
 		if (bit == '\0')
 			kill(info->si_pid, SIGUSR1);
 		bit = 0;
 		bit_cnt = 0;
 	}
 }
-
 
 int	main(int argc, char **argv)
 {
@@ -46,8 +45,8 @@ int	main(int argc, char **argv)
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = &signal_handler2;
 	sigemptyset(&sa.sa_mask);
-	sigaction(SIGUSR1, &sa, 0);
-	sigaction(SIGUSR2, &sa, 0);
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
 	while (1)
 		pause();
 	return (0);

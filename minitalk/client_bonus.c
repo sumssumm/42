@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:08:52 by suminpar          #+#    #+#             */
-/*   Updated: 2023/11/14 21:04:51 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:55:32 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	send_char(pid_t pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		bit++;
-		usleep(110);
+		usleep(180);
 	}
 }
 
@@ -45,11 +45,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	server_pid = ft_atoi(argv[1]);
+	if (server_pid <= 100 || server_pid > 99998)
+	{
+		ft_printf("Error: Invalid PID!\n");
+		return (1);
+	}
 	message = argv[2];
+	signal(SIGUSR1, received_sig);
 	while (*message)
 	{
-		signal(SIGUSR1, received_sig);
-		signal(SIGUSR2, received_sig);
 		send_char(server_pid, *message);
 		message++;
 	}

@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:08:54 by suminpar          #+#    #+#             */
-/*   Updated: 2023/11/14 20:40:36 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:05:01 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	signal_handler(int signo)
 	bit_cnt++;
 	if (bit_cnt == 8)
 	{
-		ft_printf("%c", (unsigned char)bit);
+		write(1, &bit, 1);
 		bit = 0;
 		bit_cnt = 0;
 	}

@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:08:58 by suminpar          #+#    #+#             */
-/*   Updated: 2023/11/12 19:32:15 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:59:14 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <signal.h>
+# include <sys/_types.h>
 # include "libft/libft.h"
 
 #endif
