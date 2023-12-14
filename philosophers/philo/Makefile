@@ -1,29 +1,30 @@
-NAME		= philo
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-LIB			= -Llibft -lft
+NAME		=	philo
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -pthread
 
-SRCS		= philo.c
+SRCS		=	philo.c \
+				utils.c \
+				data.c	\
+				philo.c	\
+				
 
-OBJS		= $(SRCS:.c=.o)
 
-HEADER 	= philo.h
+OBJS		=	$(SRCS:.c=.o)
+
+HEADER		=	philo.h
 
 all:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEADER)
-	make -C ./libft/
-	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
 
 clean:
 	rm -rf $(OBJS)
-	make clean -C ./libft/
 
 fclean: clean
 	rm -rf $(NAME)
-	make fclean -C ./libft/
 
 re: 
 	make fclean

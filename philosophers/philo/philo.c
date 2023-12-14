@@ -12,7 +12,29 @@
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+t_philo	*init_philo(t_data *data)
 {
-	
+	int		i;
+	t_philo	*philo;
+
+	philo = malloc(sizeof(t_philo) * data->number_of_philo);
+	if (philo == NULL)
+		return (NULL);
+	i = 0;
+	while (i < data->number_of_philo)
+	{
+		philo[i].data = data;
+		philo[i].id = i;
+		philo[i].left_fork = i;
+		philo[i].right_fork = (i + 1) % data->number_of_philo;
+		philo[i].eat_cnt = 0;
+		philo[i].last_eat_time = get_time(); //data->start_time
+		i++;
+	}
+	return (philo);
+}
+
+int	create_philo_thread(t_philo *philo, t_data *data)
+{
+
 }
