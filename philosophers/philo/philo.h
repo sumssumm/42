@@ -27,9 +27,12 @@ typedef struct	s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
+	int				flag_finish;
+	int				finish_eat;
 	long			start_time;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	eat_mutex;
 } t_data;
 
 typedef struct	s_philo
@@ -40,21 +43,25 @@ typedef struct	s_philo
 	int			right_fork;
 	int			eat_cnt;
 	long		last_eat_time;
-	pthread_t	tid;
+	pthread_t	thread;
 } t_philo;
 
-int	ph_atoi(char *str);
-int	print_error();
-int	check_argv(char **argv);
-int	ft_free(t_data *data, t_philo *philo);
+int		ph_atoi(char *str);
+int		print_error(char *str);
+int		check_argv(char **argv);
+// int		ft_free(t_data *data, t_philo *philo);
+long	get_time(void);
+void	ft_usleep(long sleep_time, t_data *data);
 
-int	init_data(t_data *data, int argc, char **argv);
-int	check_data(t_data *data);
-int	init_data_mutex(t_data *data);
+int		init_data(t_data *data, int argc, char **argv);
+int		init_data_mutex(t_data *data);
+int		init_philo(t_philo *philo, t_data *data);
 
-t_philo	*init_philo(t_data *data);
-int	create_philo_threads(t_philo *philo, t_data *data);
-
+int		create_threads(t_philo *philo, t_data *data);
+void	*ph_thread(void *argv);
+int		philo_eat(t_philo *philo, t_data *data);
+int		print_ph_state(t_data *data, int id, char *msg);
+void	check_finish(t_philo *philo, t_data *data);
 
 
 #endif
