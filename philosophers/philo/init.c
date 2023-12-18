@@ -8,11 +8,10 @@ int	init_data(t_data *data, int argc, char **argv)
 	data->time_to_sleep = ph_atoi(argv[4]);
 	data->must_eat = 0;
 	data->flag_finish = 0;
-	data->finish_eat = 0;
-	data->start_time = get_time();
-	if (data->number_of_philo <= 0 || data->time_to_die < 0 \
-		|| data->time_to_eat < 0 || data->time_to_sleep < 0 \
-		|| data->start_time < 0)
+	data->eat_all = 0;
+	data->start_time = 0;
+	if (data->number_of_philo < 1 || data->time_to_die < 0 \
+		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
 		return (1);
 	if (argc == 6)
 	{
@@ -29,7 +28,7 @@ int	init_data_mutex(t_data *data)
 {
 	int	i;
 
-	if (pthread_mutex_init(&(data->print_mutex), NULL) != 0)
+	if (pthread_mutex_init(&(data->print_mutex), NULL) )
 		return (1);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philo);
 	if (data->forks == NULL)
@@ -37,7 +36,7 @@ int	init_data_mutex(t_data *data)
 	i = 0;
 	while (i < data->number_of_philo)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL) != 0)
+		if (pthread_mutex_init(&(data->forks[i]), NULL))
 			return (1);
 		i++;
 	}
@@ -53,10 +52,14 @@ int	init_philo(t_philo *philo, t_data *data)
 	{
 		philo[i].data = data;
 		philo[i].id = i + 1;
-		philo[i].left_fork = i;
-		philo[i].right_fork = (i + 1) % data->number_of_philo;
+		philo[i].left = i;
+		philo[i].right = (i + 1) % data->number_of_philo;
 		philo[i].eat_cnt = 0;
-		philo[i].last_eat_time = data->start_time;
+		philo[i].last_eat_time = 0;
+		if (pthread_mutex_init(&(philo[i].eat_mutex), NULL))
+			return (1);
+		if (pthread_mutex_init(&(philo[i].flag_finish_mutex), NULL))
+			return (1);
 		i++;
 	}
 	return (0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:17:15 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/12 13:41:16 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:00:09 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,28 @@ typedef struct	s_data
 	int				time_to_sleep;
 	int				must_eat;
 	int				flag_finish;
-	int				finish_eat;
+	int				eat_all;
 	long			start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
-	pthread_mutex_t	eat_mutex;
 } t_data;
 
 typedef struct	s_philo
 {
-	t_data		*data;
-	int			id;
-	int			left_fork;
-	int			right_fork;
-	int			eat_cnt;
-	long		last_eat_time;
-	pthread_t	thread;
+	t_data			*data;
+	int				id;
+	int				left;
+	int				right;
+	int				eat_cnt;
+	int				flag_finish;
+	long			last_eat_time;
+	pthread_t		thread;
+	pthread_mutex_t	eat_mutex;
+	pthread_mutex_t	flag_finish_mutex;
 } t_philo;
 
 int		ph_atoi(char *str);
 int		print_error(char *str);
-int		check_argv(char **argv);
-// int		ft_free(t_data *data, t_philo *philo);
 long	get_time(void);
 void	ft_usleep(long sleep_time, t_data *data);
 
@@ -59,8 +59,10 @@ int		init_philo(t_philo *philo, t_data *data);
 
 int		create_threads(t_philo *philo, t_data *data);
 void	*ph_thread(void *argv);
-int		philo_eat(t_philo *philo, t_data *data);
-int		print_ph_state(t_data *data, int id, char *msg);
+int		philo_eat_even(t_philo *philo, t_data *data);
+int		philo_eat_odd(t_philo *philo, t_data *data);
+// int		philo_eat(t_philo *philo, t_data *data);
+int		print_ph_state(t_philo *philo, int id, char *msg);
 void	check_finish(t_philo *philo, t_data *data);
 
 

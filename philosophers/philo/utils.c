@@ -25,38 +25,13 @@ int	ph_atoi(char *str)
 	return (result * sign);
 }
 
-// int	ft_free(t_data *data, t_philo *philo)
-// {
-// 	if (data != NULL)
-// 		free(data);
-// 	if (philo != NULL)
-// 		free(philo);
-// 	return (print_error());
-// }
-
 long	get_time(void)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL) != 0)
-		return (-1);
+	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
-
-// void	ft_usleep(long sleep_time, t_data *data)
-// {
-// 	long	start;
-// 	long	now;
-
-// 	start = get_time();
-// 	while (!(data->flag_finish))
-// 	{
-// 		now = get_time();
-// 		if (now - start >= sleep_time)
-// 			break ;
-// 		usleep(100);
-// 	}
-// }
 
 void	ft_usleep(long sleep_time, t_data *data)
 {
