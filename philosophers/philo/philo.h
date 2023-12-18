@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:17:15 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/18 14:00:09 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/18 14:45:07 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct	s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	int				flag_finish;
-	int				eat_all;
 	long			start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
