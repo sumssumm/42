@@ -1,11 +1,11 @@
 NAME		=	philo
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=thread
-
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=thread
 SRCS		=	main.c 	\
 				philo.c \
 				utils.c \
 				init.c	\
+				new.c
 
 OBJS		=	$(SRCS:.c=.o)
 
