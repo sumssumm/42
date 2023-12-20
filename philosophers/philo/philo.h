@@ -6,19 +6,19 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:17:15 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/20 19:02:22 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/21 00:03:40 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h> //printf
-# include <stdlib.h> //malloc, free
-# include <string.h> //memset
-# include <unistd.h> //write, usleep 
-# include <pthread.h> //pthread
-# include <sys/time.h> //gettimeofday
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 typedef struct s_data
 {
@@ -47,14 +47,15 @@ typedef struct s_philo
 }	t_philo;
 
 int		ph_atoi(char *str);
+int		ph_move_sign(char *str, int *sign);
 int		print_error(t_philo *philo, t_data *data, char *str);
 long	get_time(void);
-void	ft_usleep(long start, long sleep_time);
-void	free_data_philo(t_philo *philo, t_data *data);
+void	ft_usleep(t_philo *philo, long start, long sleep_time);
 
 int		init_data(t_data *data, int argc, char **argv);
 int		init_data_mutex(t_data *data);
 int		init_philo(t_philo *philo, t_data *data);
+void	free_data_philo(t_philo *philo, t_data *data);
 
 int		create_threads(t_philo *philo, t_data *data);
 void	*ph_thread(void *argv);

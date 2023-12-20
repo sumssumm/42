@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:18:52 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/20 18:36:52 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:13:29 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,32 @@ int	init_philo(t_philo *philo, t_data *data)
 		i++;
 	}
 	return (0);
+}
+
+void	free_data_philo(t_philo *philo, t_data *data)
+{
+	int	i;
+
+	if (data)
+	{
+		i = -1;
+		pthread_mutex_destroy(&data->print_mutex);
+		if (data->forks)
+		{
+			while (++i < data->number_of_philo)
+				pthread_mutex_destroy(&data->forks[i]);
+			free(data->forks);
+		}
+		free(data);
+	}
+	if (philo)
+	{
+		i = -1;
+		while (++i < data->number_of_philo)
+		{
+			pthread_mutex_destroy(&philo[i].flag_finish_mutex);
+			pthread_mutex_destroy(&philo[i].eat_mutex);
+		}
+		free(philo);
+	}
 }

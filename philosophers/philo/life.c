@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 17:53:42 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/20 18:57:11 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/21 01:16:53 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@ void	ph_behavior(t_philo *philo, t_data *data)
 		time = print_ph_state(philo, philo->id, "is sleeping", 1);
 		if (!time)
 			return ;
-		ft_usleep(time, (long)data->time_to_sleep);
+		ft_usleep(philo, time, (long)data->time_to_sleep);
 		if (!print_ph_state(philo, philo->id, "is thinking", 0))
 			return ;
-		if (data->number_of_philo % 2 == 1)
-			usleep(2000);
-		else
-			usleep(500);
+		usleep(500);
 	}
 }
 
@@ -39,13 +36,13 @@ long	print_ph_state(t_philo *philo, int id, char *msg, int needtime)
 
 	pthread_mutex_lock(&philo->data->print_mutex);
 	time = get_time();
-	if (philo->flag_finish != 1)
-		printf("%ld %d %s\n", time - philo->data->start_time, id, msg);
-	else
+	if (philo->flag_finish)
 	{
 		pthread_mutex_unlock(&(philo->data->print_mutex));
 		return (0);
 	}
+	else
+		printf("%ld %d %s\n", time - philo->data->start_time, id, msg);
 	pthread_mutex_unlock(&(philo->data->print_mutex));
 	if (needtime)
 		return (time);
@@ -67,7 +64,7 @@ int	philo_eat_set(t_philo *philo, t_data *data)
 	philo->last_eat_time = time;
 	philo->eat_cnt++;
 	pthread_mutex_unlock(&philo->eat_mutex);
-	ft_usleep(time, (long)data->time_to_eat);
+	ft_usleep(philo, time, (long)data->time_to_eat);
 	return (0);
 }
 
