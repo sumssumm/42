@@ -1,11 +1,12 @@
 NAME		=	philo
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=thread
+CFLAGS		=	-Wall -Wextra -Werror
 SRCS		=	main.c 	\
 				philo.c \
 				utils.c \
 				init.c	\
-				new.c
+				eat.c	\
+				life.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -15,6 +16,7 @@ all:	$(NAME)
 
 $(NAME)	:	$(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+
 %.o	:	%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEADER)
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 18:18:52 by suminpar          #+#    #+#             */
+/*   Updated: 2023/12/20 18:36:52 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	init_data(t_data *data, int argc, char **argv)
@@ -6,8 +18,6 @@ int	init_data(t_data *data, int argc, char **argv)
 	data->time_to_die = ph_atoi(argv[2]);
 	data->time_to_eat = ph_atoi(argv[3]);
 	data->time_to_sleep = ph_atoi(argv[4]);
-	data->must_eat = 0;
-	data->start_time = 0;
 	if (data->number_of_philo < 1 || data->time_to_die < 0 \
 		|| data->time_to_eat < 0 || data->time_to_sleep < 0)
 		return (1);
@@ -55,8 +65,9 @@ int	init_philo(t_philo *philo, t_data *data)
 		philo[i].eat_cnt = 0;
 		philo[i].last_eat_time = 0;
 		philo[i].flag_finish = 0;
-		pthread_mutex_init(&philo[i].flag_finish_mutex, NULL);
-		pthread_mutex_init(&philo[i].eat_mutex, NULL);
+		if (pthread_mutex_init(&philo[i].flag_finish_mutex, NULL) \
+			|| pthread_mutex_init(&philo[i].eat_mutex, NULL))
+			return (1);
 		i++;
 	}
 	return (0);

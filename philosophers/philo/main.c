@@ -1,9 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 17:53:45 by suminpar          #+#    #+#             */
+/*   Updated: 2023/12/20 18:57:07 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	check_leak(void)
-{
-	system("leaks philo");
-}
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {
@@ -11,15 +18,17 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	if ((argc != 5 && argc != 6))
-		return (print_error("need 5 or 6 arguments"));
+		return (print_error(NULL, NULL, "need 5 or 6 arguments"));
 	data = malloc(sizeof(t_data));
-	if (data == NULL || init_data(data, argc, argv))
-		return (print_error("data init"));
+	if (data == NULL || !memset(data, 0, sizeof(t_data)) \
+		|| init_data(data, argc, argv))
+		return (print_error(NULL, data, "data init"));
 	philo = malloc(sizeof(t_philo) * data->number_of_philo);
-	if (philo == NULL || init_philo(philo, data))
-		return (print_error("philo init"));
+	if (philo == NULL || !memset(philo, 0, sizeof(t_philo)) \
+		|| init_philo(philo, data))
+		return (print_error(philo, data, "philo init"));
 	if (create_threads(philo, data))
-		return (print_error("create threads"));
+		return (print_error(philo, data, "create threads"));
 	free_data_philo(philo, data);
 	return (0);
 }

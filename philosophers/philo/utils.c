@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 17:53:56 by suminpar          #+#    #+#             */
+/*   Updated: 2023/12/20 18:57:06 by suminpar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int	print_error(char *str)
+int	print_error(t_philo *philo, t_data *data, char *str)
 {
+	free_data_philo(philo, data);
 	printf("Error: %s\n", str);
 	return (1);
 }
@@ -10,21 +23,28 @@ void	free_data_philo(t_philo *philo, t_data *data)
 {
 	int	i;
 
-	i = 0;
-	pthread_mutex_destroy(&data->print_mutex);
-	while (i < data->number_of_philo)
+	if (data)
 	{
-		if (pthread_mutex_destroy(&data->forks[i]) || \
-			pthread_mutex_destroy(&philo[i].flag_finish_mutex) || \
-			pthread_mutex_destroy(&philo[i].eat_mutex))
+		i = -1;
+		pthread_mutex_destroy(&data->print_mutex);
+		if (data->forks)
 		{
-			printf("%d\n", i);
+			while (++i < data->number_of_philo)
+				pthread_mutex_destroy(&data->forks[i]);
+			free(data->forks);
 		}
-		i++;
+		free(data);
 	}
-	free(data->forks);
-	free(data);
-	free(philo);
+	if (philo)
+	{
+		i = -1;
+		while (++i < data->number_of_philo)
+		{
+			pthread_mutex_destroy(&philo[i].flag_finish_mutex);
+			pthread_mutex_destroy(&philo[i].eat_mutex);
+		}
+		free(philo);
+	}
 }
 
 int	ph_atoi(char *str)
@@ -67,10 +87,8 @@ void	ft_usleep(long start, long sleep_time)
 	while (1)
 	{
 		now = get_time();
-		if (now - start > sleep_time)
-			printf("%30ld\n", now - start);
 		if (now - start + 10 < sleep_time)
-			usleep(2000);
+			usleep(1500);
 		else if (now - start >= sleep_time)
 			break ;
 		usleep(100);

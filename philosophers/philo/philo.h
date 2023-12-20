@@ -6,7 +6,7 @@
 /*   By: suminpar <suminpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 04:17:15 by suminpar          #+#    #+#             */
-/*   Updated: 2023/12/18 14:45:07 by suminpar         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:02:22 by suminpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo
 }	t_philo;
 
 int		ph_atoi(char *str);
-int		print_error(char *str);
+int		print_error(t_philo *philo, t_data *data, char *str);
 long	get_time(void);
 void	ft_usleep(long start, long sleep_time);
 void	free_data_philo(t_philo *philo, t_data *data);
@@ -58,24 +58,20 @@ int		init_philo(t_philo *philo, t_data *data);
 
 int		create_threads(t_philo *philo, t_data *data);
 void	*ph_thread(void *argv);
-int		philo_eat_even(t_philo *philo, t_data *data);
-int		philo_eat_odd(t_philo *philo, t_data *data);
-long	print_ph_state(t_philo *philo, int id, char *msg, int needtime);
-void	check_finish(t_philo *philo, t_data *data);
+void	check_alive(t_philo *philo, t_data *data);
+int		ph_dead_or_must_set(t_philo *philo, t_data *data, int *pos);
+void	ph_stop_or_dead(t_philo *philo, t_data *data, int pos);
 
 int		philo_eat(t_philo *philo, t_data *data);
-void	ph_behavior(t_philo *philo, t_data *data);
-int		philo_dead(t_philo *philo, t_data *data);
+int		philo_eat_even(t_philo *philo, t_data *data);
+int		philo_eat_odd(t_philo *philo, t_data *data);
 int		ph_left_fork_up(t_philo *philo, t_data *data);
 int		ph_right_fork_up(t_philo *philo, t_data *data);
+
+void	ph_behavior(t_philo *philo, t_data *data);
+long	print_ph_state(t_philo *philo, int id, char *msg, int needtime);
+void	philo_dead(t_philo *philo, t_data *data);
 void	ph_fork_down(t_philo *philo, t_data *data);
 int		philo_eat_set(t_philo *philo, t_data *data);
 
 #endif
-
-/*
-	디버깅용 print 있으니 제출 하기 전 지우기
-	새로 만든 함수들 다 new.c에 넣어둠.
-	free하는 함수 main에 작성해뒀는데, 한번 테스트 해봐!
-	집중력 흐트러져서 안된 부분도 아직 많은 듯...
-*/
