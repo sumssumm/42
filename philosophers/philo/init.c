@@ -77,6 +77,16 @@ void	free_data_philo(t_philo *philo, t_data *data)
 {
 	int	i;
 
+	if (philo)
+	{
+		i = -1;
+		while (++i < data->number_of_philo)
+		{
+			pthread_mutex_destroy(&philo[i].flag_finish_mutex);
+			pthread_mutex_destroy(&philo[i].eat_mutex);
+		}
+		free(philo);
+	}
 	if (data)
 	{
 		i = -1;
@@ -88,15 +98,5 @@ void	free_data_philo(t_philo *philo, t_data *data)
 			free(data->forks);
 		}
 		free(data);
-	}
-	if (philo)
-	{
-		i = -1;
-		while (++i < data->number_of_philo)
-		{
-			pthread_mutex_destroy(&philo[i].flag_finish_mutex);
-			pthread_mutex_destroy(&philo[i].eat_mutex);
-		}
-		free(philo);
 	}
 }
