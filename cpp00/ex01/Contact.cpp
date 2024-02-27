@@ -28,27 +28,27 @@ void	Contact::set_secret(std::string str)
 	darkest_secret = str;
 }
 
-std::string	Contact::get_firstname(void)
+std::string	Contact::get_firstname(void) const
 {
 	return first_name;
 }
 
-std::string	Contact::get_lastname(void)
+std::string	Contact::get_lastname(void) const
 {
 	return last_name;
 }
 
-std::string	Contact::get_nickname(void)
+std::string	Contact::get_nickname(void) const
 {
 	return nick_name;
 }
 
-std::string	Contact::get_phonenumber(void)
+std::string	Contact::get_phonenumber(void) const
 {
 	return phone_number;
 }
 
-std::string	Contact::get_secret(void)
+std::string	Contact::get_secret(void) const
 {
 	return darkest_secret;
 }

@@ -3,32 +3,26 @@
 int main(void)
 {
 	std::string	str;
+	PhoneBook	ph;
 
 	while (1)
 	{
 		std::cout << "COMMAND (ADD, SEARCH, EXIT): ";
 		if (!std::getline(std::cin, str) || std::cin.eof())
 		{
-			std::cout << "Try again!" << std::endl;
-			break;
+			clearerr(stdin);
+			std::cin.clear();
+			std::cout << "Try agian!" << std::endl;
+			continue ;
 		}
 		if (str == "EXIT")
-		{
-			std::cout << "EXIT" << std::endl;
-			return 0;
-		}
+			exit(0);
 		else if (str == "ADD")
-		{
-			std::cout << "add" << std::endl;
-			continue ;
-		}
+			ph.add_contact();
 		else if (str == "SEARCH")
-		{
-			std::cout << "search" << std::endl;
-			continue ;
-		}
+			ph.search_contact();
 		else
-			std::cout << "Try again" << std::endl;
+			std::cout << "Try again!" << std::endl;
 	}
 	return 0;
 }
