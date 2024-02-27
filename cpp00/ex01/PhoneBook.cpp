@@ -117,8 +117,8 @@ void	PhoneBook::search_contact(void)
 	{
 		std::cout << '|' << "         " << i + 1;
 		print_contact(contacts[i].get_firstname());
-		print_contact(contacts[i].get_firstname());
-		print_contact(contacts[i].get_firstname());
+		print_contact(contacts[i].get_lastname());
+		print_contact(contacts[i].get_nickname());
 		std::cout << '|' << std::endl;
 	}
 	std::cout << " ------------------------------------------- " << std::endl;
