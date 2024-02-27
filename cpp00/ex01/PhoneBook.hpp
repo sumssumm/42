@@ -6,6 +6,7 @@
 # include <iostream>
 # include <cstdlib>
 # include <sstream>
+# include <cstdio>
 
 class PhoneBook {
 	private:
