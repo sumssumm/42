@@ -122,6 +122,5 @@ void	PhoneBook::search_contact(void)
 		std::cout << '|' << std::endl;
 	}
 	std::cout << " ------------------------------------------- " << std::endl;
-	// std::cout << "Enter the number: ";
 	print_detail();
 }
