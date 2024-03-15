@@ -29,6 +29,7 @@ void Harl::error(void) {
 }
 
 void Harl::complain(std::string level) {
+	void (Harl::*ptr_complain[4])(void) = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
 	std::string	complain_level[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 
 	int	i = 0;
@@ -41,16 +42,19 @@ void Harl::complain(std::string level) {
 	switch (i)
 	{
 		case 0:
-			this->debug();
+			(this->*ptr_complain[0])();
 			std::cout << std::endl;
+			//fallthrough
 		case 1:
-			this->info();
+			(this->*ptr_complain[1])();
 			std::cout << std::endl;
+			//fallthrough
 		case 2:
-			this->warning();
+			(this->*ptr_complain[2])();
 			std::cout << std::endl;
+			//fallthrough
 		case 3:
-			this->error();
+			(this->*ptr_complain[3])();
 			std::cout << std::endl;
 			break ;
 	

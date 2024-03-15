@@ -10,6 +10,7 @@ int main()
 		bob.attack();
 		club.setType("some other type of club");
 		bob.attack();
+		std::cout << std::endl;
 	}
 	{
 		Weapon club = Weapon("crude spiked club");
@@ -18,6 +19,11 @@ int main()
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
+		jim.attack();
+		std::cout << std::endl;
+	}
+	{
+		HumanB jim("Jim");
 		jim.attack();
 	}
 	return 0;
