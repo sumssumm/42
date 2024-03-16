@@ -5,6 +5,7 @@ int main(int argc, char **argv) {
 		std::cout << "Need a message" << std::endl;
 		return 1;
 	}
+	
 	Harl harl;
 
 	harl.complain(argv[1]);

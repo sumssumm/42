@@ -24,52 +24,49 @@ int main(int argc, char **argv)
 		std::cout << "Usage: ./replace [filename] [string1] [string2]" << std::endl;
 		return 1;
 	}
-	else
+	std::string			infile = argv[1];
+	const std::string	s1 = argv[2];
+	const std::string	s2 = argv[3];
+	std::ifstream		ifs;
+	std::ofstream		ofs;
+	std::string			outfile;
+	std::string			buffer;
+
+	if (infile.empty() || s1.empty())
 	{
-		std::string			infile = argv[1];
-		const std::string	s1 = argv[2];
-		const std::string	s2 = argv[3];
-		std::ifstream		ifs;
-		std::ofstream		ofs;
-		std::string			outfile;
-		std::string			buffer;
-	
-		if (infile.empty() || s1.empty() || s2.empty())
-		{
-			std::cout << "input is empty" << std::endl;
-			return 1;
-		}
-		ifs.open(infile);
-		if (ifs.fail()) //!ifs.is_open()
-		{
-			std::cout << "Cannot open file" << std::endl;
-			return 1;
-		}
-		if (ifs.peek() == std::ifstream::traits_type::eof())
-		{
-			std::cout << "file is empty" << std::endl;
-			ifs.close();
-			return 1;
-		}
-		outfile = infile.append(".replace");
-		ofs.open(outfile);
-		if (ofs.fail())
-		{
-			std::cout << "Cannot open file" << std::endl;
-			ifs.close();
-			return 1;
-		}
-		while (1)
-		{
-			std::getline(ifs, buffer);
-			replace(buffer, s1, s2);
-			ofs << buffer;
-			if (ifs.eof())
-				break ;
-			ofs << std::endl;
-		}
-		ifs.close();
-		ofs.close();
+		std::cout << "input is empty" << std::endl;
+		return 1;
 	}
+	ifs.open(infile.c_str());
+	if (ifs.fail()) //!ifs.is_open()
+	{
+		std::cout << "Cannot open file" << std::endl;
+		return 1;
+	}
+	if (ifs.peek() == std::ifstream::traits_type::eof())
+	{
+		std::cout << "file is empty" << std::endl;
+		ifs.close();
+		return 1;
+	}
+	outfile = infile.append(".replace");
+	ofs.open(outfile.c_str());
+	if (ofs.fail())
+	{
+		std::cout << "Cannot open file" << std::endl;
+		ifs.close();
+		return 1;
+	}
+	while (1)
+	{
+		std::getline(ifs, buffer);
+		replace(buffer, s1, s2);
+		ofs << buffer;
+		if (ifs.eof())
+			break ;
+		ofs << std::endl;
+	}
+	ifs.close();
+	ofs.close();
 	return 0;
 }

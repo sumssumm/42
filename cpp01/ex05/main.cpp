@@ -27,6 +27,5 @@ int main() {
 	harl.complain("");
 	std::cout << std::endl;
 
-
 	return 0;
 }
