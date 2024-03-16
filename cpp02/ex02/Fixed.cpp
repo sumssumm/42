@@ -112,7 +112,7 @@ Fixed&	Fixed::min(Fixed &fixed1, Fixed &fixed2) {
 	return fixed1;
 }
 
-const Fixed	Fixed::min(Fixed const &fixed1, Fixed const &fixed2)
+const Fixed&	Fixed::min(Fixed const &fixed1, Fixed const &fixed2)
 {
 	if (fixed1 > fixed2)
 		return fixed2;
@@ -125,7 +125,7 @@ Fixed&	Fixed::max(Fixed &fixed1, Fixed &fixed2) {
 	return fixed2;
 }
 
-const Fixed	Fixed::max(Fixed const &fixed1, Fixed const &fixed2) {
+const Fixed&	Fixed::max(Fixed const &fixed1, Fixed const &fixed2) {
 	if (fixed1 > fixed2)
 		return fixed1;
 	return fixed2;
@@ -134,6 +134,7 @@ const Fixed	Fixed::max(Fixed const &fixed1, Fixed const &fixed2) {
 int	Fixed::getRawBits(void) const {
 	return this->number_;
 }
+
 void	Fixed::setRawBits(int const raw) {
 	this->number_ = raw;
 }

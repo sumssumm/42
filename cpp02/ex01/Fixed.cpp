@@ -10,7 +10,7 @@ Fixed::Fixed(const int number) : number_(number << bits_) {
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float number) : number_(roundf(number * (1 << bits_))) {
+Fixed::Fixed(const float number) : number_(static_cast<int>(roundf(number * (1 << bits_)))) {
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -31,11 +31,11 @@ Fixed::~Fixed() {
 }
 
 float	Fixed::toFloat(void) const {
-	return static_cast<float>(this->number_) / (1 << this->bits_);
+	return static_cast<float>(this->number_) / (1 << bits_);
 }
 
 int	Fixed::toInt(void) const {
-	return this->number_ >> this->bits_;
+	return this->number_ >> bits_;
 }
 
 int	Fixed::getRawBits(void) const {
