@@ -1,11 +1,10 @@
-#include "FragTrap.hpp"
-#include "ScavTrap.hpp"
-#include "ClapTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main() {
 	ClapTrap a("AAA");
 	ScavTrap b("BBB");
 	FragTrap c("CCC");
+	DiamondTrap d("DDD");
 
 	std::cout << std::endl;
 
@@ -22,13 +21,21 @@ int main() {
 	b.guardGate();
 	std::cout << std::endl;
 
-	c.attack("AAA");
-	a.takeDamage(10);
-	a.beRepaired(1);
+	c.attack("DDD");
+	d.takeDamage(10);
+	d.beRepaired(1);
 	std::cout << std::endl;
 
 	c.highFiveGuys();
 	std::cout << std::endl;
 
+	d.attack("AAA");
+	a.takeDamage(10);
+	a.beRepaired(3);
+	std::cout << std::endl;
+
+	d.whoAmI();
+	std::cout << std::endl;
+
 	return 0;
-}
+};

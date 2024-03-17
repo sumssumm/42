@@ -1,7 +1,7 @@
 #include "ScavTrap.hpp"
 
 int main() {
-	ScavTrap a("AAA");
+	ClapTrap a("AAA");
 	ScavTrap b("BBB");
 
 	std::cout << std::endl;
