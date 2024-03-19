@@ -8,6 +8,7 @@ class Cat : public Animal
 {
 	private:
 		Brain *brain_;
+
 	public:
 		Cat();
 		Cat(const Cat &cat);

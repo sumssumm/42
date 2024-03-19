@@ -8,6 +8,7 @@ class Brain
 {
 	private:
 		std::string ideas_[100];
+
 	public:
 		Brain();
 		Brain(std::string idea);
