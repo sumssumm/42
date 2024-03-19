@@ -69,3 +69,9 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 			  << " is repaired " << amount
 			  << " hit points!" << std::endl;
 }
+
+void ClapTrap::print() {
+	std::cout << "Hit point: " << hit_point_ << std::endl;
+	std::cout << "Energy point: " << energy_point_ << std::endl;
+	std::cout << "Attack Damage: " << attack_damage_ << std::endl;
+}

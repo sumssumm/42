@@ -1,6 +1,6 @@
 NAME		=	fragtrap
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -Wshadow  -Wno-shadow
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 SRCS		=	ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp main.cpp 
 OBJS		=	$(SRCS:.cpp=.o)

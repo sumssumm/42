@@ -10,6 +10,7 @@
 		"philo.h": "c",
 		"__bit_reference": "cpp",
 		"__config": "cpp",
+<<<<<<< HEAD
 		"__hash_table": "cpp",
 		"__locale": "cpp",
 		"__node_handle": "cpp",
@@ -21,6 +22,27 @@
 		"cctype": "cpp",
 		"charconv": "cpp",
 		"clocale": "cpp",
+=======
+		"__debug": "cpp",
+		"__errc": "cpp",
+		"__functional_base": "cpp",
+		"__hash_table": "cpp",
+		"__locale": "cpp",
+		"__mutex_base": "cpp",
+		"__node_handle": "cpp",
+		"__nullptr": "cpp",
+		"__split_buffer": "cpp",
+		"__string": "cpp",
+		"__threading_support": "cpp",
+		"__tuple": "cpp",
+		"algorithm": "cpp",
+		"array": "cpp",
+		"atomic": "cpp",
+		"bit": "cpp",
+		"bitset": "cpp",
+		"cctype": "cpp",
+		"chrono": "cpp",
+>>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 		"cmath": "cpp",
 		"complex": "cpp",
 		"cstdarg": "cpp",
@@ -32,26 +54,45 @@
 		"ctime": "cpp",
 		"cwchar": "cpp",
 		"cwctype": "cpp",
+<<<<<<< HEAD
 		"execution": "cpp",
 		"fstream": "cpp",
+=======
+		"deque": "cpp",
+		"exception": "cpp",
+		"fstream": "cpp",
+		"functional": "cpp",
+>>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 		"initializer_list": "cpp",
 		"iomanip": "cpp",
 		"ios": "cpp",
 		"iosfwd": "cpp",
 		"iostream": "cpp",
 		"istream": "cpp",
+<<<<<<< HEAD
 		"limits": "cpp",
 		"locale": "cpp",
+=======
+		"iterator": "cpp",
+		"limits": "cpp",
+		"locale": "cpp",
+		"memory": "cpp",
+>>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 		"mutex": "cpp",
 		"new": "cpp",
 		"optional": "cpp",
 		"ostream": "cpp",
 		"ratio": "cpp",
 		"sstream": "cpp",
+<<<<<<< HEAD
+=======
+		"stack": "cpp",
+>>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
 		"string": "cpp",
 		"string_view": "cpp",
+<<<<<<< HEAD
 		"tuple": "cpp",
 		"typeinfo": "cpp",
 		"unordered_map": "cpp",
@@ -60,5 +101,14 @@
 		"algorithm": "cpp",
 		"iterator": "cpp",
 		"memory_resource": "cpp"
+=======
+		"system_error": "cpp",
+		"tuple": "cpp",
+		"type_traits": "cpp",
+		"typeinfo": "cpp",
+		"unordered_map": "cpp",
+		"utility": "cpp",
+		"vector": "cpp"
+>>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 	}
 }
