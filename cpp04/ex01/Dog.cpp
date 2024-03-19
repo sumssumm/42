@@ -15,7 +15,7 @@ Dog& Dog::operator=(const Dog &dog){
 		delete this->brain_;
 		this->brain_ = new Brain(*dog.brain_);
 		this->type_ = dog.type_;
-		}
+	}
 	std::cout << "Dog operator= called" << std::endl;;
 	return *this;
 }

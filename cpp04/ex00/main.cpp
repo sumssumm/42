@@ -29,6 +29,7 @@ int main()
 	delete j;
 	delete i;
 	delete k;
+	
 	// atexit(check);
 	return 0;
 }
