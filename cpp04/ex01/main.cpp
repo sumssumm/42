@@ -25,7 +25,7 @@ int main()
 
 	std::cout << "--------------------" << std::endl;
 
-	Brain 
+	// Brain 
 	// atexit(check);
 	return 0;
 }
