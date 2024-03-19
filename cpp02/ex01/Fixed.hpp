@@ -13,7 +13,7 @@ class Fixed
 	public:
 		Fixed(); //default constructor
 		Fixed(const Fixed &fixed); //copy constructor
-		Fixed& operator = (const Fixed &fixed); //copy assignment operator
+		Fixed& operator=(const Fixed &fixed); //copy assignment operator
 		~Fixed(); //destructor
 		
 		Fixed(const int number);

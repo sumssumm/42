@@ -2,7 +2,7 @@
 
 Dog::Dog() : Animal() {
 	this->type_ = "Dog";
-	std::cout << "Dog constructor called" << std::endl;
+	std::cout << "Dog default constructor called" << std::endl;
 }
 
 Dog::Dog(const Dog &dog) {
@@ -13,7 +13,7 @@ Dog::Dog(const Dog &dog) {
 Dog& Dog::operator=(const Dog &dog){
 	if (this != &dog)
 		this->type_ = dog.type_;
-	std::cout << "Dog operator= called";
+	std::cout << "Dog operator= called" << std::endl;
 	return *this;
 }
 
