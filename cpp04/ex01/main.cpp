@@ -34,11 +34,7 @@ int main()
 
 	std::cout << "--------------------" << std::endl;
 
-<<<<<<< HEAD
 	std::cout << std::endl;
-=======
-	// Brain 
->>>>>>> d55bb18d4372955eb4e45d1e3454b7af7679b025
 	// atexit(check);
 	return 0;
 }
