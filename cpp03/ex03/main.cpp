@@ -35,6 +35,7 @@ int main() {
 	std::cout << std::endl;
 
 	d.whoAmI();
+	d.print();
 	std::cout << std::endl;
 
 	return 0;

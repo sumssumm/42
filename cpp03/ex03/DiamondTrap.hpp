@@ -17,7 +17,7 @@ class DiamondTrap : public FragTrap, public ScavTrap
 		~DiamondTrap();
 
 		void whoAmI();
-
+		void print();
 };
 
 #endif
