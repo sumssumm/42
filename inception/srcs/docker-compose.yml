@@ -3,6 +3,7 @@
 services:
   nginx:
     build: requirements/nginx/.
+    image: nginx
     restart: always
     container_name: nginx
     depends_on:
@@ -18,6 +19,7 @@ services:
     tty: true
   wordpress:
     build: requirements/wordpress/.
+    image: wordpress
     restart: always
     container_name: wordpress
     depends_on:
@@ -31,6 +33,7 @@ services:
     tty: true
   mariadb:
     build: requirements/mariadb/.
+    image: mariadb
     container_name: mariadb
     restart: always
     expose:
