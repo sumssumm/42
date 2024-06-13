@@ -1,0 +1,46 @@
+# version: '3.8'
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    restart: always
+    container_name: nginx
+    depends_on:
+      - wordpress
+      - mariadb
+    ports:
+      - '80:80'
+      # - '443:443'
+    volumes:
+      - ./web:/var/www/html
+    # networs:
+    #   - inception
+    tty: true
+  wordpress:
+    build: requirements/wordpress/.
+    restart: always
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    expose:
+      - '9000'
+    volumes:
+      - ./web:/var/www/html
+    # networks:
+    #   - inception
+    tty: true
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    restart: always
+    expose:
+      - '3306'
+    volumes:
+      - ./database:/var/lib/mysql
+    # networs:
+    #   - inception
+    tty: true
+
+# networks:
+#   inception:
+#     driver: bridge
