@@ -35,6 +35,7 @@ clean:
 # 볼륨까지 삭제하는 전체 정리 대상
 fclean: clean
 	# rm -rf /home/${USER}/data/
+	rm -rf ./srcs/database ./srcs/web
 
 # 재빌드 및 재실행 대상
 re: fclean all

@@ -10,7 +10,8 @@ RUN apt update && apt upgrade -y && apt install -y \
 	sendmail \
 	php-mysqli \
 	curl \
-	vim
+	vim \
+	mariadb-client
 
 RUN mkdir -p /run/php
 

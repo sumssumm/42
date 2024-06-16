@@ -2,47 +2,75 @@
 
 services:
   nginx:
-    build: requirements/nginx/.
+    build: 
+      context: requirements/nginx/.
+      args:
+        TLS_KEY_DIR: ${TLS_KEY_DIR}
+        TLS_KEY: ${TLS_KEY}
+        TLS_CRT: ${TLS_CRT}
+        TLS_SUBJ: ${TLS_SUBJ}
     image: nginx
     restart: always
+    environment:
+      TLS_CRT: ${TLS_CRT}
+      TLS_KEY: ${TLS_KEY}
+      DOMAIN_NAME: ${DOMAIN_NAME}
     container_name: nginx
     depends_on:
       - wordpress
       - mariadb
     ports:
-      # - '80:80'
       - '443:443'
     volumes:
       - ./web:/var/www/html
+      # - /home/${USER}/data:/var/www/html
     networks:
       - inception
-    tty: true
   wordpress:
-    build: requirements/wordpress/.
+    build: 
+      context: requirements/wordpress/.
     image: wordpress
     restart: always
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      WP_HOST: ${WP_HOST}
+      WP_URL: ${WP_URL}
+      WP_TITLE: ${WP_TITLE}
+      WP_ADMIN_USER: ${WP_ADMIN_USER}
+      WP_ADMIN_PASSWORD: ${WP_ADMIN_PASSWORD}
+      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
+      WP_USER: ${WP_USER}
+      WP_USER_PASSWORD: ${WP_ADMIN_USER}
+      WP_USER_EMAIL: ${WP_USER_EMAIL}
     container_name: wordpress
     depends_on:
       - mariadb
     expose:
-      - '9000'
+      - "9000"
     volumes:
       - ./web:/var/www/html
+      # - /home/${USER}/data:/var/www/html
     networks:
       - inception
-    tty: true
   mariadb:
     build: requirements/mariadb/.
     image: mariadb
     container_name: mariadb
     restart: always
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     expose:
       - '3306'
     volumes:
       - ./database:/var/lib/mysql
+      # - /home/${USER}/data:/var/lib/mysql
     networks:
       - inception
-    tty: true
 
 networks:
   inception:
