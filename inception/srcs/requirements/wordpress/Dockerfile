@@ -1,25 +1,25 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt update && apt upgrade -y && apt install -y \
-	php7.3 \
+	php \
 	php-fpm \
 	php-cli \
 	wget \
 	php-mbstring \
 	php-xml \
-	sendmail \
 	php-mysqli \
 	curl \
-	vim \
 	mariadb-client
 
 RUN mkdir -p /run/php
 
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/.
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/.
 COPY ./tools/wp-init.sh .
 
 RUN chmod +x wp-init.sh
 
+EXPOSE 9000
+
 ENTRYPOINT [ "./wp-init.sh" ]
 
-CMD [ "php-fpm7.3", "-F" ]
+CMD [ "php-fpm7.4", "-F" ]

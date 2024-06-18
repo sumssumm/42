@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 ARG TLS_KEY_DIR
 ARG TLS_KEY
@@ -18,9 +18,12 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 			-subj "$TLS_SUBJ"
 
 COPY ./conf/default .
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./tools/nginx_init.sh .
 
 RUN chmod +x nginx_init.sh
+
+EXPOSE 443
 
 ENTRYPOINT [ "./nginx_init.sh" ]
 

@@ -2,6 +2,6 @@
 
 envsubst '\$TLS_KEY \$TLS_CRT \$DOMAIN_NAME' \
 		< default \
-		> /etc/nginx/sites-available/default
+		> /etc/nginx/conf.d/default.conf
 
 exec "$@"

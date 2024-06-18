@@ -6,7 +6,7 @@ chmod +x wp-cli.phar
 ./wp-cli.phar core download --allow-root
 
 for i in {30..0}; do
-	if timeout 10s mysqladmin ping -h "${DB_HOST}" --silent; then
+	if timeout 10s mysqladmin ping -h "${WP_HOST}" --silent; then
 		break
 	fi
 	sleep 1
@@ -23,11 +23,12 @@ fi
 							--dbhost=${WP_HOST} \
 							--allow-root
 
-./wp-cli.phar core install --url=localhost \
+./wp-cli.phar core install --url=${WP_URL} \
 							--title=${WP_TITLE} \
 							--admin_user=${WP_ADMIN_USER} \
 							--admin_password=${WP_ADMIN_PASSWORD} \
 							--admin_email=${WP_ADMIN_EMAIL} \
+							--skip-email \
 							--allow-root
 
 ./wp-cli.phar user create	${WP_USER} \

@@ -1,24 +1,28 @@
-
 server {
+
 	listen 443 ssl;
+	server_name ${DOMAIN_NAME};
 
 	ssl_certificate ${TLS_CRT};
-    ssl_certificate_key ${TLS_KEY};
+	ssl_certificate_key ${TLS_KEY};
 
-    ssl_protocols TLSv1.3;
-    ssl_prefer_server_ciphers off;
+	ssl_protocols TLSv1.3;
 	root /var/www/html;
 
 	index index.php index.html index.htm index.nginx-debian.html;
 
-	server_name ${DOMAIN_NAME};
 
 	location / {
-		try_files $uri $uri/ =404;
+		try_files $uri $uri/ /index.php?$args;
 	}
 
 	location ~ \.php$ {
-		include snippets/fastcgi-php.conf;
+		include fastcgi_params;
 		fastcgi_pass wordpress:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+
+		fastcgi_read_timeout 300s;
+		fastcgi_connect_timeout 300s;
 	}
 }

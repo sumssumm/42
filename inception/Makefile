@@ -5,15 +5,18 @@ DOCKER_COMPOSE = docker compose -f srcs/docker-compose.yml
 DOCKER_EXEC = docker exec -it
 
 # 기본 대상
-.PHONY: all up down clean fclean re
+.PHONY: all build up down clean fclean re
 
-all: up
+all: build up
 
 # 컨테이너 실행 대상
+build:
+	mkdir -p /home/${USER}/data/mariadb
+	mkdir -p /home/${USER}/data/wordpress
+	$(DOCKER_COMPOSE) build --parallel
+
 up:
-	# mkdir -p /home/${USER}/data/mariadb
-	# mkdir -p /home/${USER}/data/wordpress
-	$(DOCKER_COMPOSE) up --build
+	$(DOCKER_COMPOSE) up
 
 # 컨테이너 종료 대상
 down:
@@ -34,8 +37,7 @@ clean:
 
 # 볼륨까지 삭제하는 전체 정리 대상
 fclean: clean
-	# rm -rf /home/${USER}/data/
-	rm -rf ./srcs/database ./srcs/web
+	rm -rf /home/${USER}/data/
 
 # 재빌드 및 재실행 대상
 re: fclean all
