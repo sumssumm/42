@@ -37,7 +37,9 @@ clean:
 
 # 볼륨까지 삭제하는 전체 정리 대상
 fclean: clean
-	rm -rf /home/${USER}/data/
+	docker volume rm wordpress_data mariadb_data
+	rm -rf /home/${USER}/data/mariadb
+	rm -rf /home/${USER}/data/wordpress
 
 # 재빌드 및 재실행 대상
 re: fclean all

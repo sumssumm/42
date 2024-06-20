@@ -20,7 +20,7 @@ services:
     ports:
       - '443:443'
     volumes:
-      - /home/${USER}/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     networks:
       - inception
   wordpress:
@@ -36,7 +36,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - /home/${USER}/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     networks:
       - inception
   mariadb:
@@ -49,10 +49,25 @@ services:
     expose:
       - '3306'
     volumes:
-      - /home/${USER}/data/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - inception
 
 networks:
   inception:
+    name: inception
     driver: bridge
+
+volumes:
+  wordpress_data:
+    name: wordpress_data
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/wordpress
+  mariadb_data:
+    name: mariadb_data
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/mariadb
