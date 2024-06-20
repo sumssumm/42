@@ -1,11 +1,6 @@
-# Makefile
-
 # 변수 정의
 DOCKER_COMPOSE = docker compose -f srcs/docker-compose.yml
 DOCKER_EXEC = docker exec -it
-
-# 기본 대상
-.PHONY: all build up down clean fclean re
 
 all: build up
 
@@ -43,3 +38,6 @@ fclean: clean
 
 # 재빌드 및 재실행 대상
 re: fclean all
+
+# 기본 대상
+.PHONY: all build up down clean fclean re
