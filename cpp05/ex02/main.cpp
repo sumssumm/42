@@ -1,39 +1,46 @@
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
-int main(void) {
+int main() {
   try {
-    Bureaucrat john("John", 3);
-    Bureaucrat jane("Jane", 150);
+    // 성공적인 경우
+    Bureaucrat bob("Bob", 1);
+    ShrubberyCreationForm shrubbery("home1");
+    RobotomyRequestForm robotomy("target1");
+    PresidentialPardonForm pardon("target2");
 
-    std::cout << john << std::endl;
-    std::cout << jane << std::endl;
+    bob.signForm(shrubbery);
+    bob.executeForm(shrubbery);
+    std::cout << std::endl;
 
-    AForm formA("FormA", 5, 10);
-    AForm formB("FormB", 150, 150);
+    bob.signForm(robotomy);
+    bob.executeForm(robotomy);
+    std::cout << std::endl;
 
-    std::cout << formA << std::endl;
-    std::cout << formB << std::endl;
+    bob.signForm(pardon);
+    bob.executeForm(pardon);
+    std::cout << std::endl;
 
-    john.incrementGrade();
-    std::cout << john << std::endl;
+    // 실패 사례: 서명이 안 된 경우
+    Bureaucrat alice("Alice", 50);
+    ShrubberyCreationForm shrubberyFail("home2");
 
-    john.decrementGrade();
-    std::cout << john << std::endl;
+    alice.executeForm(shrubberyFail);  // 서명이 안 되어 실패
+    std::cout << std::endl;
 
-    john.decrementGrade();
-    std::cout << john << std::endl;
+    // 실패 사례: 등급이 낮은 경우
+    Bureaucrat john("John", 72);  // 서명 등급을 만족
+    RobotomyRequestForm robotomyFail("Bob");
 
-    john.signForm(formA);
-    jane.signForm(formB);
+    john.signForm(robotomyFail);     // 서명 가능
+    john.executeForm(robotomyFail);  // 등급이 낮아 실행 실패
+    std::cout << std::endl;
 
-    std::cout << formA << std::endl;
-    std::cout << formB << std::endl;
-
-    john.signForm(formB);
-    jane.signForm(formA);
-  } catch (const std::exception& e) {
-    std::cerr << e.what() << std::endl;
+  } catch (std::exception &e) {
+    std::cerr << "Exception: " << e.what() << std::endl;
   }
 
-  return (0);
+  return 0;
 }
