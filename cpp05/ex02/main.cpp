@@ -1,5 +1,4 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
 int main(void) {
   try {
@@ -9,8 +8,8 @@ int main(void) {
     std::cout << john << std::endl;
     std::cout << jane << std::endl;
 
-    Form formA("FormA", 5, 10);
-    Form formB("FormB", 150, 150);
+    AForm formA("FormA", 5, 10);
+    AForm formB("FormB", 150, 150);
 
     std::cout << formA << std::endl;
     std::cout << formB << std::endl;
