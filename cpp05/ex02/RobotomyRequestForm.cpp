@@ -4,7 +4,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm(), mTarget("defualt") {}
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
     : AForm("RobotomyRequestForm", 72, 45), mTarget(target) {
-  std::srand(static_cast<unsigned int>(std::time(nullptr)));
+  std::srand(static_cast<unsigned int>(std::time(NULL)));
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& r)

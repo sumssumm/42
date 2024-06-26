@@ -20,7 +20,8 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 void ShrubberyCreationForm::action() const {
-  std::ofstream file(mTarget + "_shrubbery");
+  std::string fileName = mTarget + "_shrubbery";
+  std::ofstream file(fileName.c_str());
   if (file.is_open()) {
     file << "ASCII trees" << std::endl;
     file.close();
