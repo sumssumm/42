@@ -1,4 +1,4 @@
-NAME		=	Bureaucrat
+NAME		=	Intern
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
@@ -7,14 +7,16 @@ SRCS		=	main.cpp \
 					AForm.cpp \
 					ShrubberyCreationForm.cpp \
 					RobotomyRequestForm.cpp \
-					PresidentialPardonForm.cpp
+					PresidentialPardonForm.cpp \
+					Intern.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 HEADER 		=	Bureaucrat.hpp \
 						AForm.hpp \
 						ShrubberyCreationForm.hpp \
 						RobotomyRequestForm.hpp \
-						PresidentialPardonForm.hpp
+						PresidentialPardonForm.hpp \
+						Intern.hpp
 
 all:	$(NAME)
 
