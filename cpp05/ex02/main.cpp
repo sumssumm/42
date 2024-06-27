@@ -7,7 +7,7 @@ int main() {
   try {
     // 성공적인 경우
     Bureaucrat bob("Bob", 1);
-    ShrubberyCreationForm shrubbery("home1");
+    ShrubberyCreationForm shrubbery("home");
     RobotomyRequestForm robotomy("target1");
     PresidentialPardonForm pardon("target2");
 

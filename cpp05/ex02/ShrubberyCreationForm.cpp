@@ -23,7 +23,16 @@ void ShrubberyCreationForm::action() const {
   std::string fileName = mTarget + "_shrubbery";
   std::ofstream file(fileName.c_str());
   if (file.is_open()) {
-    file << "ASCII trees" << std::endl;
+    file << "        /\\\n";
+    file << "       /  \\\n";
+    file << "      /    \\\n";
+    file << "     /      \\\n";
+    file << "    /        \\\n";
+    file << "   /__________\\\n";
+    file << "       ||||\n";
+    file << "       ||||\n";
+    file << "       ||||\n";
     file.close();
-  }
+  } else
+    std::cerr << "Unable to open file" << std::endl;
 }
