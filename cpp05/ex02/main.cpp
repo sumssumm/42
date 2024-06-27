@@ -7,9 +7,9 @@ int main() {
   try {
     // 성공적인 경우
     Bureaucrat bob("Bob", 1);
-    ShrubberyCreationForm shrubbery("home");
-    RobotomyRequestForm robotomy("target1");
-    PresidentialPardonForm pardon("target2");
+    ShrubberyCreationForm shrubbery("Home");
+    RobotomyRequestForm robotomy("Target1");
+    PresidentialPardonForm pardon("Target2");
 
     bob.signForm(shrubbery);
     bob.executeForm(shrubbery);
@@ -25,7 +25,7 @@ int main() {
 
     // 실패 사례: 서명이 안 된 경우
     Bureaucrat alice("Alice", 50);
-    ShrubberyCreationForm shrubberyFail("home2");
+    ShrubberyCreationForm shrubberyFail("Home2");
 
     alice.executeForm(shrubberyFail);  // 서명이 안 되어 실패
     std::cout << std::endl;
