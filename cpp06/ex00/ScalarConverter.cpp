@@ -1,11 +1,8 @@
 #include "ScalarConverter.hpp"
 
 ScalarConverter::ScalarConverter() {}
-
 ScalarConverter::~ScalarConverter() {}
-
 ScalarConverter::ScalarConverter(const ScalarConverter& s) { *this = s; }
-
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& s) {
   if (this != &s) *this = s;
   return *this;
