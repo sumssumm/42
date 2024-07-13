@@ -127,6 +127,19 @@ int main(int, char**) {
   }
   std::cout << std::endl;
 
+  // const 타입 테스트
+  const Array<std::string> constStringArray = stringArray;
+  std::cout << "Size of constStringArray: " << constStringArray.size()
+            << std::endl;
+  for (unsigned int i = 0; i < constStringArray.size(); ++i) {
+    std::cout << "constStringArray[" << i << "] = " << constStringArray[i]
+              << std::endl;
+  }
+  std::cout << std::endl;
+
+  // const 배열에 접근 및 수정 시도
+  // constStringArray[0] = "Modified";  // 컴파일 오류 발생
+
   // 복사 생성자 테스트
   Array<std::string> copyStringArray(stringArray);
   std::cout << "Size of copyStringArray: " << copyStringArray.size()
@@ -162,6 +175,7 @@ int main(int, char**) {
   assignedStringArray[2] = "Different";
   std::cout << "After modifying assignedStringArray, stringArray[2]: "
             << stringArray[2] << std::endl;
+  std::cout << std::endl;
 
   return 0;
 }
