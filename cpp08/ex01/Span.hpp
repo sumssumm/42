@@ -9,8 +9,8 @@
 class Span {
  public:
   Span(unsigned int N);
-  Span(const Span &src);
-  Span &operator=(const Span &rhs);
+  Span(const Span &other);
+  Span &operator=(const Span &other);
   ~Span();
 
   void addNumber(int number);

@@ -4,12 +4,12 @@ Span::Span() : mN(0) {}
 
 Span::Span(unsigned int N) : mN(N) {}
 
-Span::Span(const Span &src) : mN(src.mN), mNumbers(src.mNumbers) {}
+Span::Span(const Span &other) : mN(other.mN), mNumbers(other.mNumbers) {}
 
-Span &Span::operator=(const Span &rhs) {
-  if (this != &rhs) {
-    mN = rhs.mN;
-    mNumbers = rhs.mNumbers;
+Span &Span::operator=(const Span &other) {
+  if (this != &other) {
+    mN = other.mN;
+    mNumbers = other.mNumbers;
   }
   return *this;
 }
