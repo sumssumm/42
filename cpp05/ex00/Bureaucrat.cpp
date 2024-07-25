@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {
   return out;
 }
 
-Bureaucrat::Bureaucrat() {}
+Bureaucrat::Bureaucrat() : mName("default"), mGrade(75) {}
 
 Bureaucrat::~Bureaucrat() {}
 
