@@ -12,7 +12,9 @@ int main(void) {
     } catch (const std::exception& e) {
       std::cerr << e.what() << '\n';
     }
-
+    std::cout << "-------------------------------" << std::endl;
+  
+  try{
     Bureaucrat a("a", 150);
     Bureaucrat b("b", 1);
 
@@ -20,7 +22,7 @@ int main(void) {
     std::cout << b << std::endl;
     std::cout << std::endl;
 
-    // // a.decrementGrade();
+    // a.decrementGrade();
 
     // b.incrementGrade();
 
@@ -36,6 +38,8 @@ int main(void) {
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';
   }
-
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+    }
   return (0);
 }

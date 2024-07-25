@@ -1,7 +1,5 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : mName("default"), mGrade(75) {}
-
 Bureaucrat::Bureaucrat(const std::string& name, int grade)
     : mName(name), mGrade(grade) {
   int g = getGrade();
@@ -9,19 +7,6 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
     throw GradeTooHighException();
   else if (g > 150)
     throw GradeTooLowException();
-}
-
-Bureaucrat::~Bureaucrat() {}
-
-Bureaucrat::Bureaucrat(const Bureaucrat& b)
-    : mName(b.mName), mGrade(b.mGrade) {}
-
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& b) {
-  if (this != &b) {
-    *(const_cast<std::string*>(&mName)) = b.mName;
-    mGrade = b.mGrade;
-  }
-  return *this;
 }
 
 const std::string& Bureaucrat::getName() const { return this->mName; }
@@ -53,4 +38,19 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b) {
   out << b.getName() << ", bureaucrat grade " << b.getGrade();
   return out;
+}
+
+Bureaucrat::Bureaucrat() {}
+
+Bureaucrat::~Bureaucrat() {}
+
+Bureaucrat::Bureaucrat(const Bureaucrat& b)
+    : mName(b.mName), mGrade(b.mGrade) {}
+
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& b) {
+  if (this != &b) {
+    *(const_cast<std::string*>(&mName)) = b.mName;
+    mGrade = b.mGrade;
+  }
+  return *this;
 }
