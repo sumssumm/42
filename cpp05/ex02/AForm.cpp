@@ -12,7 +12,7 @@ AForm::AForm(const std::string name, const int signGrade, const int execGrade)
       mExecGrade(execGrade) {
   if (signGrade < 1 || execGrade < 1)
     throw GradeTooHighException();
-  else if (signGrade > 150 || execGrade > 150)
+  if (signGrade > 150 || execGrade > 150)
     throw GradeTooLowException();
 }
 

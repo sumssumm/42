@@ -25,6 +25,7 @@ class AForm {
   bool getIsSigned() const;
   int getSignGrade() const;
   int getExecuteGrade() const;
+  
   void execute(Bureaucrat const &executor) const;
   virtual void action() const = 0;
 
