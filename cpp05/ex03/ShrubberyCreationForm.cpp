@@ -1,21 +1,7 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm(), mTarget("default") {}
-
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
     : AForm("ShrubberyCreationForm", 145, 137), mTarget(target) {}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& s)
-    : AForm(s), mTarget(s.mTarget) {}
-
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(
-    const ShrubberyCreationForm& s) {
-  if (this != &s) {
-    AForm::operator=(s);
-    mTarget = s.mTarget;
-  }
-  return *this;
-}
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
@@ -35,4 +21,18 @@ void ShrubberyCreationForm::action() const {
     file.close();
   } else
     std::cerr << "Unable to open file" << std::endl;
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm(), mTarget("default") {}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& s)
+    : AForm(s), mTarget(s.mTarget) {}
+
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(
+    const ShrubberyCreationForm& s) {
+  if (this != &s) {
+    AForm::operator=(s);
+    mTarget = s.mTarget;
+  }
+  return *this;
 }
