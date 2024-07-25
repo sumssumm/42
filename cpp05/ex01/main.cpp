@@ -15,15 +15,6 @@ int main(void) {
     std::cout << formA << std::endl;
     std::cout << formB << std::endl;
 
-    john.incrementGrade();
-    std::cout << john << std::endl;
-
-    john.decrementGrade();
-    std::cout << john << std::endl;
-
-    john.decrementGrade();
-    std::cout << john << std::endl;
-
     john.signForm(formA);
     jane.signForm(formB);
 

@@ -1,8 +1,9 @@
 #ifndef FORM_HPP
 #define FORM_HPP
 
-#include <exception>
+#include <stdexcept>
 #include <iostream>
+#include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -13,19 +14,21 @@ class Form {
   const int mSignGrade;
   const int mExecGrade;
 
- public:
   Form();
-  Form(const std::string &name, const int signGrade, const int execGrade);
-  ~Form();
   Form(const Form &f);
   Form &operator=(const Form &f);
 
-  void beSigned(const Bureaucrat &b);
+ public:
+  Form(const std::string &name, const int signGrade, const int execGrade);
+  ~Form();
+  
   const std::string &getName() const;
   bool getIsSigned() const;
   int getSignGrade() const;
   int getExecuteGrade() const;
 
+  void beSigned(const Bureaucrat &b);
+  
   class GradeTooHighException : public std::exception {
    public:
     const char *what() const throw();
