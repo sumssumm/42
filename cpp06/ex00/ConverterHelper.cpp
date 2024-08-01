@@ -21,7 +21,7 @@ bool ConverterHelper::isInt(const std::string& literal) {
 }
 
 bool ConverterHelper::isFloat(const std::string& literal) {
-  if (literal.back() != 'f') return false;
+  if (*literal.rbegin() != 'f') return false;
   std::string floatPart = literal.substr(0, literal.length() - 1);
   char* end;
   std::strtod(floatPart.c_str(), &end);
