@@ -5,16 +5,16 @@
 
 #define MAX_VAL 750
 
-int main(int, char**) {
+int main(int, char **) {
   Array<int> numbers(MAX_VAL);
-  int* mirror = new int[MAX_VAL];
+  int *mirror = new int[MAX_VAL];
   srand(time(NULL));
   for (int i = 0; i < MAX_VAL; i++) {
     const int value = rand();
     numbers[i] = value;
     mirror[i] = value;
   }
-  // SCOPE
+
   {
     Array<int> tmp = numbers;
     Array<int> test(tmp);
@@ -28,12 +28,12 @@ int main(int, char**) {
   }
   try {
     numbers[-2] = 0;
-  } catch (const std::exception& e) {
+  } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
   }
   try {
     numbers[MAX_VAL] = 0;
-  } catch (const std::exception& e) {
+  } catch (const std::exception &e) {
     std::cerr << e.what() << '\n';
   }
 
@@ -46,15 +46,23 @@ int main(int, char**) {
   // 기본 생성자로 빈 배열 생성
   Array<int> emptyArray;
   std::cout << "Size of emptyArray: " << emptyArray.size() << std::endl;
+  try {
+    std::cout << emptyArray[0] << std::endl; // 예외 발생
+  } catch (const std::exception &e) {
+    std::cout << "Exception caught: " << e.what() << std::endl;
+  }
   std::cout << std::endl;
 
   // n개의 요소로 초기화된 배열 생성
   unsigned int n = 5;
   Array<int> intArray(n);
+  for (unsigned int i = 0; i < n; i++)
+    std::cout << intArray[i] << "\n";
   std::cout << "Size of intArray: " << intArray.size() << std::endl;
   for (unsigned int i = 0; i < intArray.size(); ++i) {
     intArray[i] = i * 2;
   }
+  std::cout << std::endl;
 
   for (unsigned int i = 0; i < intArray.size(); ++i) {
     std::cout << "intArray[" << i << "] = " << intArray[i] << std::endl;
@@ -97,8 +105,8 @@ int main(int, char**) {
 
   // 인덱스 범위 초과 테스트
   try {
-    intArray[10] = 42;  // 범위를 벗어난 인덱스
-  } catch (const std::exception& e) {
+    intArray[10] = 42; // 범위를 벗어난 인덱스
+  } catch (const std::exception &e) {
     std::cerr << "Exception caught: " << e.what() << std::endl;
   }
   std::cout << std::endl;
