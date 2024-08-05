@@ -2,6 +2,7 @@
 #define FUNCTIONS_HPP
 
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 #include "A.hpp"
@@ -9,8 +10,8 @@
 #include "Base.hpp"
 #include "C.hpp"
 
-Base* generate(void);
-void identify(Base* p);
-void identify(Base& p);
+Base *generate(void);
+void identify(Base *p);
+void identify(Base &p);
 
 #endif

@@ -2,39 +2,40 @@
 
 ConverterHelper::ConverterHelper() {}
 ConverterHelper::~ConverterHelper() {}
-ConverterHelper::ConverterHelper(const ConverterHelper& s) { *this = s; }
-ConverterHelper& ConverterHelper::operator=(const ConverterHelper& s) {
-  if (this != &s) *this = s;
+ConverterHelper::ConverterHelper(const ConverterHelper &s) { *this = s; }
+ConverterHelper &ConverterHelper::operator=(const ConverterHelper &s) {
+  if (this != &s)
+    *this = s;
   return *this;
 }
 
-bool ConverterHelper::isChar(const std::string& literal) {
+bool ConverterHelper::isChar(const std::string &literal) {
   return literal.length() == 1 && !isdigit(literal[0]);
 }
 
-bool ConverterHelper::isInt(const std::string& literal) {
-  if (literal.length() > 11) return false;
-  char* end;
+bool ConverterHelper::isInt(const std::string &literal) {
+  char *end;
   errno = 0;
   std::strtol(literal.c_str(), &end, 10);
-  return errno != ERANGE && *end == '\0';
+  return *end == '\0';
 }
 
-bool ConverterHelper::isFloat(const std::string& literal) {
-  if (*literal.rbegin() != 'f') return false;
+bool ConverterHelper::isFloat(const std::string &literal) {
+  if (*literal.rbegin() != 'f')
+    return false;
   std::string floatPart = literal.substr(0, literal.length() - 1);
-  char* end;
+  char *end;
   std::strtod(floatPart.c_str(), &end);
   return *end == '\0';
 }
 
-bool ConverterHelper::isDouble(const std::string& literal) {
-  char* end;
+bool ConverterHelper::isDouble(const std::string &literal) {
+  char *end;
   std::strtod(literal.c_str(), &end);
   return *end == '\0';
 }
 
-void ConverterHelper::convertToChar(const std::string& literal) {
+void ConverterHelper::convertToChar(const std::string &literal) {
   char char_value = literal[0];
   int int_value = static_cast<int>(char_value);
   float float_value = static_cast<float>(int_value);
@@ -42,8 +43,8 @@ void ConverterHelper::convertToChar(const std::string& literal) {
   printAll(char_value, true, int_value, float_value, double_value);
 }
 
-void ConverterHelper::convertToInt(const std::string& literal) {
-  char* end;
+void ConverterHelper::convertToInt(const std::string &literal) {
+  char *end;
   errno = 0;
   long int_value = std::strtol(literal.c_str(), &end, 10);
   if (errno == ERANGE || *end != '\0' ||
@@ -61,8 +62,8 @@ void ConverterHelper::convertToInt(const std::string& literal) {
   printAll(char_value, true, int_value, float_value, double_value);
 }
 
-void ConverterHelper::convertToFloat(const std::string& literal) {
-  char* end;
+void ConverterHelper::convertToFloat(const std::string &literal) {
+  char *end;
   char char_value = -1;
   int valid_int = 0;
   int int_value = 0;
@@ -90,8 +91,8 @@ void ConverterHelper::convertToFloat(const std::string& literal) {
   printAll(char_value, valid_int, int_value, float_value, double_value);
 }
 
-void ConverterHelper::convertToDouble(const std::string& literal) {
-  char* end;
+void ConverterHelper::convertToDouble(const std::string &literal) {
+  char *end;
   char char_value = -1;
   int valid_int = 0;
   int int_value = 0;
