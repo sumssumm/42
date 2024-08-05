@@ -57,6 +57,8 @@ int main() {
   const int arr[] = {1, 2, 3};
   std::cout << "const int arr: ";
   iter(arr, 3, printElement<int>);
+  std::cout << std::endl;
+
   // iter(arr, 3, incrementElement<int>); // 오류: const 배열의 요소를 수정할 수
   // 없음
 
