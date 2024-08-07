@@ -55,7 +55,7 @@ int main() {
   std::cout << "-------------------------------------" << std::endl;
 
   const int arr[] = {1, 2, 3};
-  std::cout << "const int arr: ";
+  std::cout << "const int array: ";
   iter(arr, 3, printElement<int>);
   std::cout << std::endl;
 
