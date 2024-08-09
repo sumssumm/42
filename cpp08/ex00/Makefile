@@ -1,22 +1,28 @@
 NAME		=	easyfind
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRCS		=	main.cpp 
-OBJS		=	$(SRCS:.cpp=.o)
 
-HEADER 		=	easyfind.hpp
+OBJDIR  = build
+OBJS    = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRCS))
+DEPS    = $(patsubst %.cpp, $(OBJDIR)/%.d, $(SRCS))
 
 all:	$(NAME)
 
 $(NAME):	$(OBJS) $(HEADER)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-	
-%.o	:	%.cpp
+
+-include $(DEPS)
+
+$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -rf $(NAME)
@@ -25,4 +31,4 @@ re:
 	make fclean
 	make all
 
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re

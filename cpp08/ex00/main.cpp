@@ -25,6 +25,7 @@ int main() {
   } catch (std::exception &e) {
     std::cerr << e.what() << std::endl;
   }
+  std::cout << "---------------------------------" << std::endl;
 
   std::list<int> lst;
   lst.push_back(10);

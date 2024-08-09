@@ -15,6 +15,8 @@ int main() {
   mstack.pop();
 
   std::cout << "top: " << mstack.top() << std::endl;
+  std::cout << "---------------------------------" << std::endl;
+
   std::cout << "size: " << mstack.size() << std::endl;
   std::cout << "---------------------------------" << std::endl;
 
