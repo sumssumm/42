@@ -10,14 +10,12 @@ void BitcoinExchange::loadDB(std::string const &dbFile) {
   if (!std::getline(file, line))
     throw std::runtime_error("Error: empty data file.");
 
-  if (line != "date,exchange_rate") {
+  if (line != "date,exchange_rate")
     throw std::runtime_error("Error: invalid database file format.");
-  }
 
   while (std::getline(file, line)) {
     std::istringstream iss(line);
-    std::string date;
-    std::string rateStr;
+    std::string date, rateStr;
 
     if (std::getline(iss, date, ',') && std::getline(iss, rateStr)) {
       if (date[10] != '\0' || !isdigit(rateStr[0]))
@@ -83,6 +81,7 @@ void BitcoinExchange::processInput(std::string const &inputFile) const {
         std::cerr << "Error: bad input => " + line << std::endl;
         continue;
       }
+
       if (valueStr[0] != ' ' || (!isdigit(valueStr[1]) && valueStr[1] != '-')) {
         std::cerr << "Error: bad input => " + line << std::endl;
         continue;
@@ -113,6 +112,7 @@ void BitcoinExchange::processInput(std::string const &inputFile) const {
         std::cerr << "Error: this date does not exist => " + date << std::endl;
         continue;
       }
+
       double result = rate * value;
       std::cout << date << " => " << value << " = " << result << std::endl;
     } else {

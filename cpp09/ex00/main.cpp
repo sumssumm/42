@@ -5,6 +5,7 @@ int main(int argc, char** argv) {
     std::cout << "Error: could not open file." << std::endl;
     return 1;
   }
+
   const std::string dbFile = "./data.csv";
   const std::string inputFile = argv[1];
 
