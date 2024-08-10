@@ -4,7 +4,8 @@ BitcoinExchange::BitcoinExchange(std::string const &dbFile) { loadDB(dbFile); }
 
 void BitcoinExchange::loadDB(std::string const &dbFile) {
   std::ifstream file(dbFile.c_str());
-  if (!file.is_open()) throw std::runtime_error("Error: could not open file.");
+  if (!file.is_open())
+    throw std::runtime_error("Error: could not open file.");
 
   std::string line;
   if (!std::getline(file, line))
@@ -37,16 +38,19 @@ void BitcoinExchange::loadDB(std::string const &dbFile) {
 }
 
 bool BitcoinExchange::isValidDate(std::string const &date) const {
-  if (date.length() != 10 || date[4] != '-' || date[7] != '-') return false;
+  if (date.length() != 10 || date[4] != '-' || date[7] != '-')
+    return false;
 
   int year = std::atoi(date.substr(0, 4).c_str());
   int month = std::atoi(date.substr(5, 2).c_str());
   int day = std::atoi(date.substr(8, 2).c_str());
 
-  if (year < 1000 || year > 9999 || month < 1 || month > 12) return false;
+  if (year < 1000 || year > 9999 || month < 1 || month > 12)
+    return false;
 
   int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) days[1] = 29;
+  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+    days[1] = 29;
 
   return day > 0 && day <= days[month - 1];
 }
@@ -55,7 +59,8 @@ double BitcoinExchange::getExchangeRate(std::string const &date) const {
   std::map<std::string, double>::const_iterator it =
       mExchangeRates.lower_bound(date);
   if (it == mExchangeRates.end() || it->first != date) {
-    if (it == mExchangeRates.begin()) return -1;
+    if (it == mExchangeRates.begin())
+      return -1;
     --it;
   }
   return it->second;
@@ -63,7 +68,8 @@ double BitcoinExchange::getExchangeRate(std::string const &date) const {
 
 void BitcoinExchange::processInput(std::string const &inputFile) const {
   std::ifstream file(inputFile.c_str());
-  if (!file.is_open()) throw std::runtime_error("Error: could not open file.");
+  if (!file.is_open())
+    throw std::runtime_error("Error: could not open file.");
 
   std::string line;
   if (!std::getline(file, line))
