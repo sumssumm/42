@@ -1,5 +1,18 @@
 #include "Span.hpp"
 
+void testRange() {
+  try {
+    Span sp = Span(2);
+    std::cout << "Testing Range Span" << std::endl;
+    sp.addNumber(1);
+    sp.addNumber(2);
+    sp.addNumber(3);
+    std::cout << sp.shortestSpan() << std::endl;
+  } catch (const std::exception &e) {
+    std::cerr << "Caught exception: " << e.what() << std::endl;
+  }
+}
+
 void testEmptySpan() {
   try {
     Span sp = Span(5);
@@ -76,6 +89,8 @@ int main() {
 
     testSingleNumberSpan();
     std::cout << "---------------------------------" << std::endl;
+
+    testRange();
 
   } catch (const std::exception &e) {
     std::cerr << e.what() << std::endl;
