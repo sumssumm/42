@@ -9,9 +9,11 @@ int main(int argc, char **argv) {
   try {
     RPN rpn;
     int result = rpn.runCalculate(argv[1]);
+    std::cout << "GE\n"; 
+
     std::cout << result << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << "Error" << std::endl;
+    std::cerr << e.what() << std::endl;
     return 1;
   }
 
