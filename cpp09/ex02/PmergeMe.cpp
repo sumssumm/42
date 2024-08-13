@@ -35,8 +35,8 @@ void PmergeMe::sortVector() {
 
   std::cout << "After: ";
   printVector(mVector);
-  if (std::is_sorted(mVector.begin(), mVector.end()))
-    std::cout << "sorted!" << std::endl;
+  // if (std::is_sorted(mVector.begin(), mVector.end()))
+  //   std::cout << "sorted!" << std::endl;
 }
 
 void PmergeMe::mergeInsertVector(std::vector<int> &main) {
@@ -117,8 +117,8 @@ void PmergeMe::sortDeque() {
 
   std::cout << "After: ";
   printDeque(mDeque);
-  if (std::is_sorted(mDeque.begin(), mDeque.end()))
-    std::cout << "sorted!" << std::endl;
+  // if (std::is_sorted(mDeque.begin(), mDeque.end()))
+  //   std::cout << "sorted!" << std::endl;
 }
 
 void PmergeMe::mergeInsertDeque(std::deque<int> &main) {

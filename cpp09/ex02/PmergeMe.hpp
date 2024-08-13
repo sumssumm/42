@@ -7,6 +7,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <vector>
+#include <cerrno>
+#include <climits>
 
 class PmergeMe {
  public:
