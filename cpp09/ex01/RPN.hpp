@@ -8,18 +8,18 @@
 #include <stdexcept>
 
 class RPN {
-public:
+ public:
   RPN();
   RPN(const RPN &other);
   RPN &operator=(const RPN &other);
   ~RPN();
 
-  int runCalculate(const std::string &expression);
+  double runCalculate(const std::string &expression);
 
-private:
-  std::stack<int> stack;
+ private:
+  std::stack<double> stack;
 
-  void checkNumber(int number) const;
+  void checkNumber(double number) const;
   void checkOperator(const std::string &token) const;
 };
 

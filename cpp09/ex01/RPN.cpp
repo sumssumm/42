@@ -13,24 +13,23 @@ RPN &RPN::operator=(const RPN &other) {
 
 RPN::~RPN() {}
 
-int RPN::runCalculate(const std::string &expression) {
+double RPN::runCalculate(const std::string &expression) {
   std::stringstream ss(expression);
   std::string token;
 
   while (ss >> token) {
     if (token.size() == 1 && isdigit(token[0])) {
-      int number = token[0] - '0';
+      double number = token[0] - '0';
       checkNumber(number);
       stack.push(number);
-    }
-    else {
+    } else {
       checkOperator(token);
       if (stack.size() < 2)
         throw std::runtime_error("Error: not enough number");
-      
-      int b = stack.top();
+
+      double b = stack.top();
       stack.pop();
-      int a = stack.top();
+      double a = stack.top();
       stack.pop();
       if (token == "+")
         stack.push(a + b);
@@ -39,20 +38,18 @@ int RPN::runCalculate(const std::string &expression) {
       else if (token == "*")
         stack.push(a * b);
       else if (token == "/") {
-        if (b == 0)
-          throw std::runtime_error("Error: divide by 0");
+        if (b == 0) throw std::runtime_error("Error: divide by 0");
         stack.push(a / b);
       }
     }
   }
 
-  if (stack.size() != 1)
-    throw std::runtime_error("Error: invalid expression");
+  if (stack.size() != 1) throw std::runtime_error("Error: invalid expression");
 
   return stack.top();
 }
 
-void RPN::checkNumber(int number) const {
+void RPN::checkNumber(double number) const {
   if (number >= 10)
     throw std::runtime_error("Error: number is greater than or equal to 10");
 }

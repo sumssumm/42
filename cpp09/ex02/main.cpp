@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv) {
   if (argc < 2) {
-    std::cerr << "Error: need more integers." << std::endl;
+    std::cout << "Error: need more integers." << std::endl;
     return 1;
   }
 
@@ -22,13 +22,14 @@ int main(int argc, char **argv) {
       deq.pushDeque(static_cast<int>(number));
     }
     deq.sortDeque();
+
     clock_t end = clock();
     std::cout << "Time to process a range of " << argc - 1
               << " elements with std::deque : "
               << static_cast<double>(end - start) * 1000.0 / CLOCKS_PER_SEC
               << " ms" << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 1;
   }
 
@@ -54,7 +55,7 @@ int main(int argc, char **argv) {
               << static_cast<double>(end - start) * 1000.0 / CLOCKS_PER_SEC
               << " ms" << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 1;
   }
 

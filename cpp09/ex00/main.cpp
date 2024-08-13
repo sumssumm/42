@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     BitcoinExchange btc(dbFile);
     btc.processInput(inputFile);
   } catch (const std::exception& e) {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 1;
   }
   return 0;

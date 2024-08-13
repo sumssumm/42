@@ -2,16 +2,16 @@
 
 int main(int argc, char **argv) {
   if (argc != 2) {
-    std::cerr << "Error" << std::endl;
+    std::cout << "Error" << std::endl;
     return 1;
   }
 
   try {
     RPN rpn;
-    int result = rpn.runCalculate(argv[1]);
+    double result = rpn.runCalculate(argv[1]);
     std::cout << result << std::endl;
   } catch (const std::exception &e) {
-    std::cerr << e.what() << std::endl;
+    std::cout << e.what() << std::endl;
     return 1;
   }
 

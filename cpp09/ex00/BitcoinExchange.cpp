@@ -4,8 +4,7 @@ BitcoinExchange::BitcoinExchange(std::string const &dbFile) { loadDB(dbFile); }
 
 void BitcoinExchange::loadDB(std::string const &dbFile) {
   std::ifstream file(dbFile.c_str());
-  if (!file.is_open())
-    throw std::runtime_error("Error: could not open file.");
+  if (!file.is_open()) throw std::runtime_error("Error: could not open file.");
 
   std::string line;
   if (!std::getline(file, line))
@@ -38,19 +37,22 @@ void BitcoinExchange::loadDB(std::string const &dbFile) {
 }
 
 bool BitcoinExchange::isValidDate(std::string const &date) const {
-  if (date.length() != 10 || date[4] != '-' || date[7] != '-')
-    return false;
+  if (date.length() != 10 || date[4] != '-' || date[7] != '-') return false;
 
-  int year = std::atoi(date.substr(0, 4).c_str());
-  int month = std::atoi(date.substr(5, 2).c_str());
-  int day = std::atoi(date.substr(8, 2).c_str());
+  std::istringstream issYear(date.substr(0, 4));
+  std::istringstream issMonth(date.substr(5, 2));
+  std::istringstream issDay(date.substr(8, 2));
+  int year, month, day;
+  issYear >> year;
+  issMonth >> month;
+  issDay >> day;
 
-  if (year < 1000 || year > 9999 || month < 1 || month > 12)
-    return false;
+  if (!issYear.eof() || !issMonth.eof() || !issDay.eof()) return false;
+
+  if (year < 1000 || year > 9999 || month < 1 || month > 12) return false;
 
   int days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-    days[1] = 29;
+  if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) days[1] = 29;
 
   return day > 0 && day <= days[month - 1];
 }
@@ -59,8 +61,7 @@ double BitcoinExchange::getExchangeRate(std::string const &date) const {
   std::map<std::string, double>::const_iterator it =
       mExchangeRates.lower_bound(date);
   if (it == mExchangeRates.end() || it->first != date) {
-    if (it == mExchangeRates.begin())
-      return -1;
+    if (it == mExchangeRates.begin()) return -1;
     --it;
   }
   return it->second;
@@ -68,8 +69,7 @@ double BitcoinExchange::getExchangeRate(std::string const &date) const {
 
 void BitcoinExchange::processInput(std::string const &inputFile) const {
   std::ifstream file(inputFile.c_str());
-  if (!file.is_open())
-    throw std::runtime_error("Error: could not open file.");
+  if (!file.is_open()) throw std::runtime_error("Error: could not open file.");
 
   std::string line;
   if (!std::getline(file, line))
@@ -84,45 +84,45 @@ void BitcoinExchange::processInput(std::string const &inputFile) const {
 
     if (std::getline(iss, date, '|') && std::getline(iss, valueStr)) {
       if (date[10] != ' ' || date[11] != '\0') {
-        std::cerr << "Error: bad input => " + line << std::endl;
+        std::cout << "Error: bad input => " + line << std::endl;
         continue;
       }
 
       if (valueStr[0] != ' ' || (!isdigit(valueStr[1]) && valueStr[1] != '-')) {
-        std::cerr << "Error: bad input => " + line << std::endl;
+        std::cout << "Error: bad input => " + line << std::endl;
         continue;
       }
 
       date = date.substr(0, date.find_last_not_of(" \t\n\r") + 1);
       valueStr = valueStr.substr(valueStr.find_first_not_of(" \t\n\r"));
       if (!isValidDate(date)) {
-        std::cerr << "Error: bad input => " + date << std::endl;
+        std::cout << "Error: bad input => " + date << std::endl;
         continue;
       }
 
       char *end;
       double value = std::strtod(valueStr.c_str(), &end);
       if (*end != '\0') {
-        std::cerr << "Error: bad inputs => " + valueStr << std::endl;
+        std::cout << "Error: bad inputs => " + valueStr << std::endl;
         continue;
       } else if (value < 0) {
-        std::cerr << "Error: not a positive number." << std::endl;
+        std::cout << "Error: not a positive number." << std::endl;
         continue;
       } else if (value > 1000) {
-        std::cerr << "Error: too large a number." << std::endl;
+        std::cout << "Error: too large a number." << std::endl;
         continue;
       }
 
       double rate = getExchangeRate(date);
       if (rate == -1) {
-        std::cerr << "Error: this date does not exist => " + date << std::endl;
+        std::cout << "Error: this date does not exist => " + date << std::endl;
         continue;
       }
 
       double result = rate * value;
       std::cout << date << " => " << value << " = " << result << std::endl;
     } else {
-      std::cerr << "Error: bad input => " + line << std::endl;
+      std::cout << "Error: bad input => " + line << std::endl;
     }
   }
   file.close();
