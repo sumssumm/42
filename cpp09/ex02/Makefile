@@ -3,7 +3,7 @@ CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRCS		=	main.cpp \
-					PmergeMe.cpp
+				PmergeMe.cpp
 
 OBJDIR  = build
 OBJS    = $(patsubst %.cpp, $(OBJDIR)/%.o, $(SRCS))
