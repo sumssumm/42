@@ -28,13 +28,15 @@ std::vector<int> generateJacobsthalVec(int size) {
 void PmergeMe::pushVector(int number) { mVector.push_back(number); }
 
 void PmergeMe::sortVector() {
-  std::cout << "before: ";
+  std::cout << "Before: ";
   printVector(mVector);
 
   mergeInsertVector(mVector);
 
-  std::cout << "after: ";
+  std::cout << "After: ";
   printVector(mVector);
+  if (std::is_sorted(mVector.begin(), mVector.end()))
+    std::cout << "sorted!" << std::endl;
 }
 
 void PmergeMe::mergeInsertVector(std::vector<int> &main) {
@@ -84,7 +86,8 @@ void PmergeMe::insertVector(std::vector<int> &main, std::vector<int> &sub) {
 void PmergeMe::printVector(std::vector<int> vector) {
   for (std::vector<int>::iterator it = vector.begin(); it != vector.end();
        it++) {
-    std::cout << *it << " ";
+    std::cout << *it;
+    if (it != vector.end() - 1) std::cout << " ";
   }
   std::cout << std::endl;
 }
@@ -107,13 +110,15 @@ std::deque<int> generateJacobsthalDeq(int size) {
 void PmergeMe::pushDeque(int number) { mDeque.push_back(number); }
 
 void PmergeMe::sortDeque() {
-  std::cout << "before: ";
+  std::cout << "Before: ";
   printDeque(mDeque);
 
   mergeInsertDeque(mDeque);
 
-  std::cout << "after: ";
+  std::cout << "After: ";
   printDeque(mDeque);
+  if (std::is_sorted(mDeque.begin(), mDeque.end()))
+    std::cout << "sorted!" << std::endl;
 }
 
 void PmergeMe::mergeInsertDeque(std::deque<int> &main) {
@@ -162,7 +167,8 @@ void PmergeMe::insertDeque(std::deque<int> &main, std::deque<int> &sub) {
 
 void PmergeMe::printDeque(std::deque<int> deque) {
   for (std::deque<int>::iterator it = deque.begin(); it != deque.end(); it++) {
-    std::cout << *it << " ";
+    std::cout << *it;
+    if (it != deque.end() - 1) std::cout << " ";
   }
   std::cout << std::endl;
 }
