@@ -30,22 +30,40 @@ double RPN::runCalculate(const std::string &expression) {
       double b = stack.top();
       stack.pop();
       double a = stack.top();
+      double cal = 0.0;
       stack.pop();
       if (token == "+")
-        stack.push(a + b);
+        cal = a + b;
       else if (token == "-")
-        stack.push(a - b);
+        cal = a - b;
       else if (token == "*")
-        stack.push(a * b);
+        cal = a * b;
       else if (token == "/") {
         if (b == 0) throw std::runtime_error("Error: divide by 0");
-        stack.push(a / b);
+        cal = a / b;
       }
+
+      // if (token == "+")
+      //   stack.push(a + b);
+      // else if (token == "-")
+      //   stack.push(a - b);
+      // else if (token == "*")
+      //   stack.push(a * b);
+      // else if (token == "/") {
+      //   if (b == 0) throw std::runtime_error("Error: divide by 0");
+      //   stack.push(a / b);
+
+      if (cal > std::numeric_limits<long>::max() ||
+          cal < std::numeric_limits<long>::min()) {
+        throw std::runtime_error("Error: number is greater than long max");
+      }
+      stack.push(cal);
     }
   }
 
   if (stack.size() != 1) throw std::runtime_error("Error: invalid expression");
-
+  if (stack.top() > std::numeric_limits<long>::max())
+    throw std::runtime_error("Error: number is greater than long max");
   return stack.top();
 }
 
