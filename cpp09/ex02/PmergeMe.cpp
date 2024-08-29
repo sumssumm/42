@@ -13,13 +13,13 @@ PmergeMe::~PmergeMe() {}
 
 /* vector */
 
-std::vector<int> generateJacobsthalVec(int size) {
-  std::vector<int> jacobsthal;
+std::vector<size_t> generateJacobsthalVec(size_t size) {
+  std::vector<size_t> jacobsthal;
   jacobsthal.push_back(1);
   if (size > 1) {
     jacobsthal.push_back(3);
     for (int i = 2;; i++) {
-      int next = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
+      size_t next = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
       jacobsthal.push_back(next);
       if (next >= size) break;
     }
@@ -37,10 +37,7 @@ void PmergeMe::sortVector() {
 
   std::cout << "After: ";
   printVector(mVector);
-  std::cout << mVector.size() << std::endl;
-  if (std::is_sorted(mVector.begin(), mVector.end())) {
-    std::cout << "Sorted!" << std::endl;
-  }
+
 }
 
 void PmergeMe::mergeInsertVector(std::vector<int> &main) {
@@ -62,16 +59,16 @@ void PmergeMe::mergeInsertVector(std::vector<int> &main) {
 }
 
 void PmergeMe::insertVector(std::vector<int> &main, std::vector<int> &sub) {
-  std::vector<int> jacobsthal = generateJacobsthalVec(sub.size());
+  std::vector<size_t> jacobsthal = generateJacobsthalVec(sub.size());
 
   // 야콥스탈 수열에 따라 순서대로 삽입
-  int prevIdx = 1;
+  size_t prevIdx = 1;
   main.insert(binarySearchInsertPos(main, sub[0]), sub[0]);
   for (size_t i = 1; i < jacobsthal.size(); ++i) {
     size_t index =
         (jacobsthal[i] >= sub.size() ? sub.size() : jacobsthal[i]) - 1;
 
-    for (int j = index; j >= prevIdx; --j) {
+    for (size_t j = index; j >= prevIdx; --j) {
       int value = sub[j];
       std::vector<int>::iterator insert_pos =
           binarySearchInsertPos(main, value);
@@ -108,13 +105,13 @@ void PmergeMe::printVector(std::vector<int> vector) {
 
 /* deque */
 
-std::deque<int> generateJacobsthalDeq(int size) {
-  std::deque<int> jacobsthal;
+std::deque<size_t> generateJacobsthalDeq(size_t size) {
+  std::deque<size_t> jacobsthal;
   jacobsthal.push_back(1);
   if (size > 1) {
     jacobsthal.push_back(3);
     for (int i = 2;; i++) {
-      int next = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
+      size_t next = jacobsthal[i - 1] + 2 * jacobsthal[i - 2];
       jacobsthal.push_back(next);
       if (next >= size) break;
     }
@@ -125,16 +122,13 @@ std::deque<int> generateJacobsthalDeq(int size) {
 void PmergeMe::pushDeque(int number) { mDeque.push_back(number); }
 
 void PmergeMe::sortDeque() {
-  // std::cout << "Before: ";
-  // printDeque(mDeque);
+  std::cout << "Before: ";
+  printDeque(mDeque);
 
   mergeInsertDeque(mDeque);
 
-  // std::cout << "After: ";
-  // printDeque(mDeque);
-  if (std::is_sorted(mDeque.begin(), mDeque.end())) {
-    std::cout << "Sorted!" << std::endl;
-  }
+  std::cout << "After: ";
+  printDeque(mDeque);
 }
 
 void PmergeMe::mergeInsertDeque(std::deque<int> &main) {
@@ -156,16 +150,16 @@ void PmergeMe::mergeInsertDeque(std::deque<int> &main) {
 }
 
 void PmergeMe::insertDeque(std::deque<int> &main, std::deque<int> &sub) {
-  std::deque<int> jacobsthal = generateJacobsthalDeq(sub.size());
+  std::deque<size_t> jacobsthal = generateJacobsthalDeq(sub.size());
 
   // 야콥스탈 수열에 따라 순서대로 삽입
-  int prevIdx = 1;
+  size_t prevIdx = 1;
   main.insert(binarySearchInsertDeque(main, sub[0]), sub[0]);
   for (size_t i = 1; i < jacobsthal.size(); ++i) {
     size_t index =
         (jacobsthal[i] >= sub.size() ? sub.size() : jacobsthal[i]) - 1;
 
-    for (int j = index; j >= prevIdx; --j) {
+    for (size_t j = index; j >= prevIdx; --j) {
       int value = sub[j];
       std::deque<int>::iterator insert_pos =
           binarySearchInsertDeque(main, value);

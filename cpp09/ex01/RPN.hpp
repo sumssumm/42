@@ -6,6 +6,7 @@
 #include <sstream>
 #include <stack>
 #include <stdexcept>
+#include <limits>
 
 class RPN {
  public:
