@@ -2,7 +2,8 @@
 
 // Constructors
 MateriaSource::MateriaSource() {
-  for (int i = 0; i < 4; i++) mInventory[i] = NULL;
+  for (int i = 0; i < 4; i++)
+    mInventory[i] = NULL;
 }
 
 MateriaSource::MateriaSource(const MateriaSource &other) {
@@ -17,7 +18,8 @@ MateriaSource::MateriaSource(const MateriaSource &other) {
 MateriaSource &MateriaSource::operator=(const MateriaSource &other) {
   if (this != &other) {
     for (int i = 0; i < 4; i++) {
-      if (mInventory[i]) delete mInventory[i];
+      if (mInventory[i])
+        delete mInventory[i];
       if (other.mInventory[i])
         mInventory[i] = other.mInventory[i]->clone();
       else
@@ -29,19 +31,23 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &other) {
 
 MateriaSource::~MateriaSource() {
   for (int i = 0; i < 4; i++) {
-    if (mInventory[i]) delete mInventory[i];
+    if (mInventory[i])
+      delete mInventory[i];
   }
 }
 
 // Member functions
 void MateriaSource::learnMateria(AMateria *m) {
-  if (m == NULL) return;
+  if (m == NULL)
+    return;
+
   for (int i = 0; i < 4; i++) {
     if (mInventory[i] == NULL) {
       mInventory[i] = m;
-      break;
+      return;
     }
   }
+  delete m;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type) {

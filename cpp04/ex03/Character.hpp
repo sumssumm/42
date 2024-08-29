@@ -8,14 +8,15 @@
 #include "IMateriaSource.hpp"
 
 class Character : public ICharacter {
- private:
+private:
   AMateria *mInventory[4];
+  AMateria *mBackup[4];
   std::string mName;
 
   Character(const Character &other);
   Character &operator=(const Character &other);
 
- public:
+public:
   Character();
   Character(std::string const &name);
   virtual ~Character();
