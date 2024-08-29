@@ -14,15 +14,21 @@ int main() {
   meta->makeSound();
   std::cout << "-------------------------" << std::endl;
 
-  const WrongAnimal *k = new WrongCat();
-  std::cout << k->getType() << " " << std::endl;
-  k->makeSound();
+  const WrongAnimal *w_animal = new WrongAnimal();
+  const WrongAnimal *w_cat = new WrongCat();
+
+  std::cout << w_animal->getType() << " " << std::endl;
+  std::cout << w_cat->getType() << " " << std::endl;
+  w_animal->makeSound();
+  w_cat->makeSound();
   std::cout << "-------------------------" << std::endl;
 
   delete meta;
   delete j;
   delete i;
-  delete k;
+  std::cout << std::endl;
+  delete w_cat;
+  delete w_animal;
 
   return 0;
 }
