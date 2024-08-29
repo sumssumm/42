@@ -1,29 +1,61 @@
 #include "Character.hpp"
 
-// Constructors
-Character::Character()
-{
-	// std::cout << "\e[0;33mDefault Constructor called of Character\e[0m" << std::endl;
+Character::Character() : mName("default") {
+  for (int i = 0; i < 4; i++) {
+    mInventory[i] = NULL;
+  }
 }
 
-Character::Character(const Character &copy)
-{
-	(void) copy;
-	// std::cout << "\e[0;33mCopy Constructor called of Character\e[0m" << std::endl;
+Character::Character(std::string const &name) : mName(name) {
+  for (int i = 0; i < 4; ++i) mInventory[i] = NULL;
 }
 
-
-// Destructor
-Character::~Character()
-{
-	// std::cout << "\e[0;31mDestructor called of Character\e[0m" << std::endl;
+Character::Character(Character const &other) : mName(other.mName) {
+  for (int i = 0; i < 4; ++i) {
+    if (other.mInventory[i])
+      mInventory[i] = other.mInventory[i]->clone();
+    else
+      mInventory[i] = NULL;
+  }
 }
 
-
-// Operators
-Character & Character::operator=(const Character &assign)
-{
-	(void) assign;
-	return *this;
+Character &Character::operator=(Character const &other) {
+  if (this != &other) {
+    mName = other.mName;
+    for (int i = 0; i < 4; ++i) {
+      if (mInventory[i]) delete mInventory[i];
+      if (other.mInventory[i])
+        mInventory[i] = other.mInventory[i]->clone();
+      else
+        mInventory[i] = NULL;
+    }
+  }
+  return *this;
 }
 
+Character::~Character() {
+  for (int i = 0; i < 4; ++i) {
+    if (mInventory[i]) delete mInventory[i];
+  }
+}
+
+std::string const &Character::getName() const { return mName; }
+
+void Character::equip(AMateria *m) {
+  if (m == NULL) return;
+  for (int i = 0; i < 4; ++i) {
+    if (mInventory[i] == NULL) {
+      mInventory[i] = m;
+      break;
+    }
+  }
+}
+
+void Character::unequip(int idx) {
+  if (idx >= 0 && idx < 4) mInventory[idx] = NULL;
+}
+
+void Character::use(int idx, ICharacter &target) {
+  if (idx >= 0 && idx < 4 && mInventory[idx] != NULL)
+    mInventory[idx]->use(target);
+}

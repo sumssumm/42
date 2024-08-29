@@ -1,23 +1,21 @@
 #ifndef ICE_HPP
-# define ICE_HPP
+#define ICE_HPP
 
-# include "AMateria.hpp"
+#include <iostream>
 
-class Ice : public AMateria
-{
-	public:
-		// Constructors
-		Ice();
-		Ice(const Ice &copy);
-		
-		// Destructor
-		~Ice();
-		
-		// Operators
-		Ice & operator=(const Ice &assign);
+#include "AMateria.hpp"
 
-		AMateria* clone() const;
-		void use(ICharacter& target);
+class Ice : public AMateria {
+ private:
+  Ice(const Ice& other);
+  Ice& operator=(const Ice& other);
+
+ public:
+  Ice();
+  ~Ice();
+
+  AMateria* clone() const;
+  void use(ICharacter& target);
 };
 
 #endif

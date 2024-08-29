@@ -1,29 +1,54 @@
 #include "MateriaSource.hpp"
 
 // Constructors
-MateriaSource::MateriaSource()
-{
-	std::cout << "\e[0;33mDefault Constructor called of MateriaSource\e[0m" << std::endl;
+MateriaSource::MateriaSource() {
+  for (int i = 0; i < 4; i++) mInventory[i] = NULL;
 }
 
-MateriaSource::MateriaSource(const MateriaSource &copy)
-{
-	(void) copy;
-	std::cout << "\e[0;33mCopy Constructor called of MateriaSource\e[0m" << std::endl;
+MateriaSource::MateriaSource(const MateriaSource &other) {
+  for (int i = 0; i < 4; i++) {
+    if (other.mInventory[i])
+      mInventory[i] = other.mInventory[i]->clone();
+    else
+      mInventory[i] = NULL;
+  }
 }
 
-
-// Destructor
-MateriaSource::~MateriaSource()
-{
-	std::cout << "\e[0;31mDestructor called of MateriaSource\e[0m" << std::endl;
+MateriaSource &MateriaSource::operator=(const MateriaSource &other) {
+  if (this != &other) {
+    for (int i = 0; i < 4; i++) {
+      if (mInventory[i]) delete mInventory[i];
+      if (other.mInventory[i])
+        mInventory[i] = other.mInventory[i]->clone();
+      else
+        mInventory[i] = NULL;
+    }
+  }
+  return *this;
 }
 
-
-// Operators
-MateriaSource & MateriaSource::operator=(const MateriaSource &assign)
-{
-	(void) assign;
-	return *this;
+MateriaSource::~MateriaSource() {
+  for (int i = 0; i < 4; i++) {
+    if (mInventory[i]) delete mInventory[i];
+  }
 }
 
+// Member functions
+void MateriaSource::learnMateria(AMateria *m) {
+  if (m == NULL) return;
+  for (int i = 0; i < 4; i++) {
+    if (mInventory[i] == NULL) {
+      mInventory[i] = m;
+      break;
+    }
+  }
+}
+
+AMateria *MateriaSource::createMateria(std::string const &type) {
+  for (int i = 0; i < 4; i++) {
+    if (mInventory[i] && mInventory[i]->getType() == type) {
+      return mInventory[i]->clone();
+    }
+  }
+  return NULL;
+}
