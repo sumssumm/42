@@ -1,6 +1,6 @@
 NAME		=	a.out
 CXX			=	c++
-CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -MMD -MP
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-fsanitize=address -g
 
 SRCS		=	main.cpp \
 				AMateria.cpp \

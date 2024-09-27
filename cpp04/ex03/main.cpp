@@ -2,13 +2,13 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
-#include <iostream>
 
-void checkLeak(void) { system("leaks a.out"); }
+// void checkLeak(void) { system("leaks a.out"); }
 
 int main() {
-  atexit(checkLeak);
-  std::cout << "== test1 ==" << std::endl;
+  // atexit(checkLeak);
+  std::cout << "== test subject ==" << std::endl;
+
   IMateriaSource *src = new MateriaSource();
   src->learnMateria(new Ice());
   src->learnMateria(new Cure());
@@ -25,12 +25,14 @@ int main() {
 
   me->use(0, *bob);
   me->use(1, *bob);
+  me->use(2, *bob);
 
   delete bob;
   delete me;
   delete src;
 
   std::cout << "\n== test max inventory ==" << std::endl;
+
   ICharacter *maxInventory = new Character("maxInventory");
   maxInventory->use(0, *maxInventory);
 
@@ -49,9 +51,12 @@ int main() {
   delete maxInventory;
 
   std::cout << "\n== unequip test (memory leak) ==" << std::endl;
+
   ICharacter *unequipTester = new Character("unequipTester");
 
-  tmp = new Ice();
+  tmp = new Cure();
+  unequipTester->unequip(0);
+
   unequipTester->equip(tmp);
   unequipTester->use(0, *unequipTester);
 

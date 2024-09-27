@@ -3,7 +3,10 @@
 #include "Dog.hpp"
 #include "WrongCat.hpp"
 
+// void check_leak() { system("leaks animal"); }
+
 int main() {
+  // atexit(check_leak);
   /* test subject */
   std::cout << "<< Test Subject >> " << std::endl;
   const Animal *j = new Dog();

@@ -3,8 +3,11 @@
 #include "Dog.hpp"
 #include "WrongCat.hpp"
 
+// void check_leak() { system("leaks animal"); }
+
 int main() {
-  // Animal a;
+  // atexit(check_leak);
+  // Animal a; // 인스턴스화 불가능
   // const Animal* meta = new Animal();
   const Animal *j = new Dog();
   std::cout << std::endl;
